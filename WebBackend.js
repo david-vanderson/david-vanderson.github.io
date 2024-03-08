@@ -291,8 +291,12 @@ function dvui(canvasId, wasmFile) {
             if (w > 0 && h > 0) {
                 hidden_input.focus();
             } else {
-                hidden_input.blur();
+                gl.canvas.focus();
             }
+        },
+        wasm_open_url: (ptr, len) => {
+            let msg = utf8decoder.decode(new Uint8Array(wasmResult.instance.exports.memory.buffer, ptr, len));
+            location.href = msg;
         },
       },
     };
