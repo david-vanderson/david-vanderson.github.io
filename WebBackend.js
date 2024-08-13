@@ -209,13 +209,13 @@ function dvui(canvasId, wasmFile) {
             gl.deleteTexture(texture);
         },
         wasm_renderGeometry(textureId, index_ptr, index_len, vertex_ptr, vertex_len, sizeof_vertex, offset_pos, offset_col, offset_uv, x, y, w, h) {
-            //console.log("renderGeometry " + textureId + " sizeof " + sizeof_vertex + " pos " + offset_pos + " col " + offset_col + " uv " + offset_uv);
+            //console.log("drawClippedTriangles " + textureId + " sizeof " + sizeof_vertex + " pos " + offset_pos + " col " + offset_col + " uv " + offset_uv);
 
             const old_scissor = gl.getParameter(gl.SCISSOR_BOX);
             gl.scissor(x, y, w, h);
 
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-            const indices = new Uint32Array(wasmResult.instance.exports.memory.buffer, index_ptr, index_len / 4);
+            const indices = new Uint16Array(wasmResult.instance.exports.memory.buffer, index_ptr, index_len / 2);
             gl.bufferData( gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
 
             gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
@@ -296,7 +296,7 @@ function dvui(canvasId, wasmFile) {
 
             gl.uniform1i(programInfo.uniformLocations.uSampler, 0);
 
-            gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_INT, 0);
+            gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 
             gl.scissor(old_scissor[0], old_scissor[1], old_scissor[2], old_scissor[3]);
         },
