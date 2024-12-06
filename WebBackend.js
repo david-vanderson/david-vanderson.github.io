@@ -104,16 +104,19 @@ function dvui(canvasId, wasmFile) {
     let touches = [];  // list of tuple (touch identifier, initial index)
     let textInputRect = [];  // x y w h of on screen keyboard editing position, or empty if none
 
+    //let par = document.createElement("p");
+    //document.body.prepend(par);
 
     function oskCheck() {
         if (textInputRect.length == 0) {
             gl.canvas.focus();
         } else {
-	    hidden_input.style.left = (window.scrollX + canvasElem.getBoundingClientRect().left + textInputRect[0]) + 'px';
-	    hidden_input.style.top = (window.scrollY + canvasElem.getBoundingClientRect().top + textInputRect[1]) + 'px';
+	    hidden_input.style.left = (window.scrollX + gl.canvas.getBoundingClientRect().left + textInputRect[0]) + 'px';
+	    hidden_input.style.top = (window.scrollY + gl.canvas.getBoundingClientRect().top + textInputRect[1]) + 'px';
 	    hidden_input.style.width = textInputRect[2] + 'px';
 	    hidden_input.style.height = textInputRect[3] + 'px';
             hidden_input.focus();
+    	    //par.textContent = hidden_input.style.left + " " + hidden_input.style.top + " " + hidden_input.style.width + " " + hidden_input.style.height;
         }
     }
 
@@ -246,6 +249,17 @@ function dvui(canvasId, wasmFile) {
             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
 	    return id;
+	},
+        wasm_textureRead(textureId, pixels_out, width, height) {
+            const texture = textures.get(textureId)[0];
+
+	    gl.bindFramebuffer(gl.FRAMEBUFFER, frame_buffer);
+	    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+
+	    var dest = new Uint8Array(wasmResult.instance.exports.memory.buffer, pixels_out, width * height * 4);
+	    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, dest, 0);
+	
+	    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 	},
 	wasm_renderTarget(id) {
 	    if (id === 0) {
@@ -422,23 +436,13 @@ function dvui(canvasId, wasmFile) {
 
         const canvas = document.querySelector(canvasId);
 
-        let div = document.createElement("div");
-        div.style.position = "relative";
-        div.style.opacity = 0;
-        div.style.zIndex = -1;
-        //div.style.width = 0;
-        //div.style.height = 0;
-        //div.style.overflow = "hidden";
         hidden_input = document.createElement("input");
-        hidden_input.style.position = "absolute";
-        hidden_input.style.left = (window.scrollX + canvas.getBoundingClientRect().left) + "px";
-        hidden_input.style.top = (window.scrollY + canvas.getBoundingClientRect().top) + "px";
-        div.appendChild(hidden_input);
-        document.body.prepend(div);
-
-        //let par = document.createElement("p");
-        //document.body.prepend(par);
-        //par.textContent += window.devicePixelRatio;
+	hidden_input.style.position = "absolute";
+	hidden_input.style.left = 0;
+	hidden_input.style.top = 0;
+        hidden_input.style.opacity = 0;
+        hidden_input.style.zIndex = -1;
+	document.body.prepend(hidden_input);
 
         gl = canvas.getContext("webgl2", { alpha: true });
         if (gl === null) {
