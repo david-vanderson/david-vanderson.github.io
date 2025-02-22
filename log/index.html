@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<title id="title">DVUI</title>
+<title id="title">DVUI Devlog</title>
 <head id="head">
     <link rel="stylesheet" type="text/css" href="/fonts.css">
     <link rel="stylesheet" type="text/css" href="/fira_code.css">
@@ -92,8 +92,11 @@
     </nav>
 <div id="content">
     <h1 class="centered title"><img src="/dvui.png"></h1>
-    <h2 class="centered subtitle" id="subtitle">Immediate Zig GUI for Apps and Games</h2>
-  <div id="page">  <div class="get-started"><a href="/demo/">Web Demo</a></div>
-<h2>What is DVUI?</h2><p>DVUI is a general purpose Zig GUI toolkit.</p><p>It is suitable for normal applications, or debugging windows in existing apps/games.</p><p>It has an <strong>immediate mode API</strong> but gives you all input events, so useable in <strong>low and variable framerate</strong> situations.</p><p>For applications DVUI can manage waiting for input so you only render frames when needed.</p></div>
+    <h2 class="centered subtitle" id="subtitle">Devlog</h2>
+  <div id="page">  <p>
+    <a href="/log.xml">RSS Feed</a>
+  </p>
+<div id=2025-02-22><h2><a class="" href="#2025-02-22">Why min_size_content?</a></h2><p>To make it clear that padding/border/margin is added on top of that.</p><p>Why not just <strong>min_size</strong>?</p><p>This is an example of naming tension in API design.</p><p>When you want a widget to be larger than its minimum size (but not expanded):</p><pre><code>.{ .min_size_content = .{ .w = 100, .h = 50 } }
+</code></pre><p>We could make it shorter and easier to remember by using just <strong>min_size</strong>, but then you have to remember (or lookup) if that already includes padding/border/margin.</p><p>So <strong>min_size_content</strong> costs more characters but makes reading the code (especially for people new to DVUI) slightly easier.</p><p>Hard to know which way to go, but I think about stuff like this a lot.</p></div></div>
 </div>
 </body>

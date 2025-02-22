@@ -1,0 +1,21 @@
+<rss version="2.0">
+ <channel>
+  <title>DVUI Devlog</title>
+  <link>https://david-vanderson.github.io/</link>
+  <description>Development Log for DVUI</description>
+  <generator>Zine -- https://zine-ssg.io</generator>
+  <language>en-us</language>
+  <lastBuildDate>Sat, 22 Feb 2025 19:13:07 +0000</lastBuildDate>
+  
+    <item>
+     <pubDate>Sat, 22 Feb 2025 00:00:00 +0000</pubDate>
+     <link>https://david-vanderson.github.io/log/#2025-02-22</link>
+     <guid>https://david-vanderson.github.io/log/#2025-02-22</guid>
+     <title>Why min_size_content?
+</title>
+     <description>&lt;div id=2025-02-22&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-02-22&quot;&gt;Why min_size_content?&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;To make it clear that padding/border/margin is added on top of that.&lt;/p&gt;&lt;p&gt;Why not just &lt;strong&gt;min_size&lt;/strong&gt;?&lt;/p&gt;&lt;p&gt;This is an example of naming tension in API design.&lt;/p&gt;&lt;p&gt;When you want a widget to be larger than its minimum size (but not expanded):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;.{ .min_size_content = .{ .w = 100, .h = 50 } }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We could make it shorter and easier to remember by using just &lt;strong&gt;min_size&lt;/strong&gt;, but then you have to remember (or lookup) if that already includes padding/border/margin.&lt;/p&gt;&lt;p&gt;So &lt;strong&gt;min_size_content&lt;/strong&gt; costs more characters but makes reading the code (especially for people new to DVUI) slightly easier.&lt;/p&gt;&lt;p&gt;Hard to know which way to go, but I think about stuff like this a lot.&lt;/p&gt;&lt;/div&gt;</description>
+    </item>
+  
+ </channel>
+</rss>
