@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <title id="title">DVUI Devlog</title>
 <head id="head">
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/fonts.css">
     <link rel="stylesheet" type="text/css" href="/fira_code.css">
     <link rel="stylesheet" type="text/css" href="/style.css">
@@ -96,7 +97,7 @@
   <div id="page">  <p>
     <a href="/log.xml">RSS Feed</a>
   </p>
-<div id=2025-02-22><h2><a class="" href="#2025-02-22">Why min_size_content?</a></h2><p>To make it clear that padding/border/margin is added on top of that.</p><p>Why not just <strong>min_size</strong>?</p><p>This is an example of naming tension in API design.</p><p>When you want a widget to be larger than its minimum size (but not expanded):</p><pre><code>.{ .min_size_content = .{ .w = 100, .h = 50 } }
+<div id=2025-02-23><h2><a class="" href="#2025-02-23">min_size_content is not the minimum</a></h2><p>If the parent does not have enough space, child widgets get less than their min size.</p><p>What about <strong>max_size_content</strong> - can a widget get more?</p><p>Yes - if that widget is expanded, it can be larger than max_size_content.</p><p><strong>min_size_content</strong> and <strong>max_size_content</strong> are both constraints imposed on the minimum size that dvui saves for each widget from frame to frame.</p></div><div id=2025-02-22><h2><a class="" href="#2025-02-22">Why min_size_content?</a></h2><p>To make it clear that padding/border/margin is added on top of that.</p><p>Why not just <strong>min_size</strong>?</p><p>This is an example of naming tension in API design.</p><p>When you want a widget to be larger than its minimum size (but not expanded):</p><pre><code>.{ .min_size_content = .{ .w = 100, .h = 50 } }
 </code></pre><p>We could make it shorter and easier to remember by using just <strong>min_size</strong>, but then you have to remember (or lookup) if that already includes padding/border/margin.</p><p>So <strong>min_size_content</strong> costs more characters but makes reading the code (especially for people new to DVUI) slightly easier.</p><p>Hard to know which way to go, but I think about stuff like this a lot.</p></div></div>
 </div>
 </body>
