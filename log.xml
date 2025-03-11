@@ -5,7 +5,16 @@
   <description>Development Log for DVUI</description>
   <generator>Zine -- https://zine-ssg.io</generator>
   <language>en-us</language>
-  <lastBuildDate>Sun, 23 Feb 2025 18:20:26 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 11 Mar 2025 21:05:50 +0000</lastBuildDate>
+  
+    <item>
+     <pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate>
+     <link>https://david-vanderson.github.io/log/#2025-03-11</link>
+     <guid>https://david-vanderson.github.io/log/#2025-03-11</guid>
+     <title>double click, long tap, and friction
+</title>
+     <description>&lt;div id=&quot;2025-03-11&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-03-11&quot;&gt;double click, long tap, and friction&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;dvui does not currently have built-in support for double-click, double-tap, or long-tap.  My current thinking is that those interaction patterns are generally worse than the alternatives.&lt;/p&gt;&lt;p&gt;The general advantage of these is to have a second way to interact with a widget besides a normal click/tap.  Otherwise you need a separate widget, or the widget be modal, or change depending on zoom level, or some other redesign.&lt;/p&gt;&lt;p&gt;The downsides are poor discoverability and accessibility.  I’ve personally had the experience of trying to double-click or long-tap something, nothing happens, and I’m left unsure if it doesn’t exist or if I did the interaction wrong.&lt;/p&gt;&lt;p&gt;I’ve watched people with slight hand shakiness try to long-tap repeatedly but only ever get a touch-drag.&lt;/p&gt;&lt;p&gt;This is why dvui’s textLayout and textEntry widgets provide a modal touch interface.  A single tap transitions between normal mode and selection mode.&lt;/p&gt;&lt;p&gt;They do have mouse-only 2-click word select and 3-click line select.  Those are features that are useful to some while not requiring use by all.&lt;/p&gt;&lt;h4&gt;How much should my opinions shape dvui’s design?&lt;/h4&gt;&lt;p&gt;On one hand dvui must serve its users (developers) in providing the UI features they need and want.&lt;/p&gt;&lt;p&gt;On the other hand dvui should serve its users by making it easier to build good UIs than bad ones.  Nobody wants a button that by default only responds to a triple-click.&lt;/p&gt;&lt;p&gt;My strategy is to make requested features possible, but use my experience to guide developers by making some features easier to use than others.&lt;/p&gt;&lt;p&gt;We see a similar strategy in Zig design, where the core team uses “friction” to guide developers - some patterns are intentionally left more awkward to use than others to discorage their use while not preventing it outright.&lt;/p&gt;&lt;/div&gt;</description>
+    </item>
   
     <item>
      <pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate>
@@ -13,7 +22,7 @@
      <guid>https://david-vanderson.github.io/log/#2025-02-23</guid>
      <title>min_size_content is not the minimum
 </title>
-     <description>&lt;div id=2025-02-23&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-02-23&quot;&gt;min_size_content is not the minimum&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;If the parent does not have enough space, child widgets get less than their min size.&lt;/p&gt;&lt;p&gt;What about &lt;strong&gt;max_size_content&lt;/strong&gt; - can a widget get more?&lt;/p&gt;&lt;p&gt;Yes - if that widget is expanded, it can be larger than max_size_content.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;min_size_content&lt;/strong&gt; and &lt;strong&gt;max_size_content&lt;/strong&gt; are both constraints imposed on the minimum size that dvui saves for each widget from frame to frame.&lt;/p&gt;&lt;/div&gt;</description>
+     <description>&lt;div id=&quot;2025-02-23&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-02-23&quot;&gt;min_size_content is not the minimum&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;If the parent does not have enough space, child widgets get less than their min size.&lt;/p&gt;&lt;p&gt;What about &lt;strong&gt;max_size_content&lt;/strong&gt; - can a widget get more?&lt;/p&gt;&lt;p&gt;Yes - if that widget is expanded, it can be larger than max_size_content.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;min_size_content&lt;/strong&gt; and &lt;strong&gt;max_size_content&lt;/strong&gt; are both constraints imposed on the minimum size that dvui saves for each widget from frame to frame.&lt;/p&gt;&lt;/div&gt;</description>
     </item>
   
     <item>
@@ -22,7 +31,7 @@
      <guid>https://david-vanderson.github.io/log/#2025-02-22</guid>
      <title>Why min_size_content?
 </title>
-     <description>&lt;div id=2025-02-22&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-02-22&quot;&gt;Why min_size_content?&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;To make it clear that padding/border/margin is added on top of that.&lt;/p&gt;&lt;p&gt;Why not just &lt;strong&gt;min_size&lt;/strong&gt;?&lt;/p&gt;&lt;p&gt;This is an example of naming tension in API design.&lt;/p&gt;&lt;p&gt;When you want a widget to be larger than its minimum size (but not expanded):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;.{ .min_size_content = .{ .w = 100, .h = 50 } }
+     <description>&lt;div id=&quot;2025-02-22&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-02-22&quot;&gt;Why min_size_content?&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;To make it clear that padding/border/margin is added on top of that.&lt;/p&gt;&lt;p&gt;Why not just &lt;strong&gt;min_size&lt;/strong&gt;?&lt;/p&gt;&lt;p&gt;This is an example of naming tension in API design.&lt;/p&gt;&lt;p&gt;When you want a widget to be larger than its minimum size (but not expanded):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;.{ .min_size_content = .{ .w = 100, .h = 50 } }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We could make it shorter and easier to remember by using just &lt;strong&gt;min_size&lt;/strong&gt;, but then you have to remember (or lookup) if that already includes padding/border/margin.&lt;/p&gt;&lt;p&gt;So &lt;strong&gt;min_size_content&lt;/strong&gt; costs more characters but makes reading the code (especially for people new to DVUI) slightly easier.&lt;/p&gt;&lt;p&gt;Hard to know which way to go, but I think about stuff like this a lot.&lt;/p&gt;&lt;/div&gt;</description>
     </item>
   
