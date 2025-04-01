@@ -5,7 +5,16 @@
   <description>Development Log for DVUI</description>
   <generator>Zine -- https://zine-ssg.io</generator>
   <language>en-us</language>
-  <lastBuildDate>Tue, 11 Mar 2025 21:05:50 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 01 Apr 2025 19:29:02 +0000</lastBuildDate>
+  
+    <item>
+     <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+     <link>https://david-vanderson.github.io/log/#2025-04-01</link>
+     <guid>https://david-vanderson.github.io/log/#2025-04-01</guid>
+     <title>March 2025
+</title>
+     <description>&lt;div id=&quot;2025-04-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-04-01&quot;&gt;March 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;dvui got a bunch of new stuff this month:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;combobox (combines textEntry and dropdown)&lt;/li&gt;&lt;li&gt;suggestions (choices that show dynamically under a textEntry)&lt;/li&gt;&lt;li&gt;tooltips&lt;/li&gt;&lt;li&gt;web file upload&lt;/li&gt;&lt;li&gt;simple plots&lt;/li&gt;&lt;li&gt;kerning&lt;/li&gt;&lt;li&gt;horizontal mouse wheel support&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Plus a whole ton of minor fixes and enhancements.&lt;/p&gt;&lt;p&gt;We had 6 people contribute code this month!&lt;/p&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+    </item>
   
     <item>
      <pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate>
