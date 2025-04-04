@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zig Documentation</title>
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTMgMTQwIj48ZyBmaWxsPSIjRjdBNDFEIj48Zz48cG9seWdvbiBwb2ludHM9IjQ2LDIyIDI4LDQ0IDE5LDMwIi8+PHBvbHlnb24gcG9pbnRzPSI0NiwyMiAzMywzMyAyOCw0NCAyMiw0NCAyMiw5NSAzMSw5NSAyMCwxMDAgMTIsMTE3IDAsMTE3IDAsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMzEsOTUgMTIsMTE3IDQsMTA2Ii8+PC9nPjxnPjxwb2x5Z29uIHBvaW50cz0iNTYsMjIgNjIsMzYgMzcsNDQiLz48cG9seWdvbiBwb2ludHM9IjU2LDIyIDExMSwyMiAxMTEsNDQgMzcsNDQgNTYsMzIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTE2LDk1IDk3LDExNyA5MCwxMDQiLz48cG9seWdvbiBwb2ludHM9IjExNiw5NSAxMDAsMTA0IDk3LDExNyA0MiwxMTcgNDIsOTUiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTUwLDAgNTIsMTE3IDMsMTQwIDEwMSwyMiIvPjwvZz48Zz48cG9seWdvbiBwb2ludHM9IjE0MSwyMiAxNDAsNDAgMTIyLDQ1Ii8+PHBvbHlnb24gcG9pbnRzPSIxNTMsMjIgMTUzLDExNyAxMDYsMTE3IDEyMCwxMDUgMTI1LDk1IDEzMSw5NSAxMzEsNDUgMTIyLDQ1IDEzMiwzNiAxNDEsMjIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyIvPjxwb2x5Z29uIHBvaW50cz0iMTI1LDk1IDEzMCwxMTAgMTA2LDExNyIvPjwvZz48L2c+PC9zdmc+">
+    <title>DVUI Documentation</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDEyLjcgMTIuNyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtOTAuMzA4IC0xMzcuNTkpIj48cmVjdCB4PSI5MS4wNDkiIHk9IjEzOS4zNCIgd2lkdGg9IjExLjIxNyIgaGVpZ2h0PSI5LjIwMjgiIHJ5PSIxLjY0NTciIGZpbGw9IiM0MDQwNDAiIHN0cm9rZT0iIzI5NzhlMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW9wYWNpdHk9Ii44OTgwNCIgc3Ryb2tlLXdpZHRoPSIxLjQzNTgiIHN0eWxlPSJwYWludC1vcmRlcjpub3JtYWwiLz48cGF0aCBkPSJtOTMuMjIgMTQyLjYydjIuNjQxNmgwLjQwMDE2cTAuNjg0MzIgMCAxLjA0MzktMC4zMzkyOCAwLjM2MjQ2LTAuMzM5MjYgMC4zNjI0Ni0wLjk4NTg5IDAtMC42NDM3My0wLjM1OTU2LTAuOTgwMDl0LTEuMDQ2OC0wLjMzNjM2em0tMS4xMTY0LTAuODQzOGgxLjE3NzNxMC45ODU4OSAwIDEuNDY3MiAwLjE0MjA3IDAuNDg0MjQgMC4xMzkxOSAwLjgyOTMxIDAuNDc1NTUgMC4zMDQ0NyAwLjI5Mjg3IDAuNDUyMzUgMC42NzU2MyAwLjE0Nzg5IDAuMzgyNzYgMC4xNDc4OSAwLjg2NyAwIDAuNDkwMDYtMC4xNDc4OSAwLjg3NTcxLTAuMTQ3ODggMC4zODI3Ni0wLjQ1MjM1IDAuNjc1NjItMC4zNDc5NiAwLjMzNjM3LTAuODM1MTEgMC40Nzg0NS0wLjQ4NzE1IDAuMTM5MTktMS40NjE0IDAuMTM5MTloLTEuMTc3M3ptNC41NzA0IDBoMS4xMjIybDEuMTQ4MyAzLjE5NTQgMS4xNDU0LTMuMTk1NGgxLjEyMjJsLTEuNjAzNSA0LjMyOTJoLTEuMzMxeiIgZmlsbD0iI2YyZjJmMiIgc3Ryb2tlLXdpZHRoPSIuMTAxODIiIHN0eWxlPSJzaGFwZS1wYWRkaW5nOjEuNTg3ODt3aGl0ZS1zcGFjZTpwcmUiIGFyaWEtbGFiZWw9IkRWIi8+PC9nPjwvc3ZnPgo=">
     <style type="text/css">
       *, *::before, *::after {
         box-sizing: border-box;
@@ -12,6 +12,7 @@
       body {
         font-family: system-ui, -apple-system, Roboto, "Segoe UI", sans-serif;
         color: #000000;
+        background-color: #F0F0F0;
       }
       .hidden {
         display: none;
@@ -25,10 +26,11 @@
       pre{
         font-family:"Source Code Pro",monospace;
         font-size:1em;
-        background-color:#F5F5F5;
+        background-color:#E0E0E0;
         padding: 1em;
         margin: 0;
         overflow-x: auto;
+        border-radius:.4em;
       }
       :not(pre) > code {
         white-space: break-spaces;
@@ -104,25 +106,29 @@
         margin: 0.5em 0 0 0;
         padding: 0;
         overflow: hidden;
-        background-color: #f1f1f1;
       }
       #listNav li {
         float:left;
+        padding-right:.3em;
       }
       #listNav li a {
         display: block;
         color: #000;
+        background-color: #e0e0e0;
         text-align: center;
         padding: .5em .8em;
         text-decoration: none;
+        border-radius:.4em;
       }
       #listNav li a:hover {
-        background-color: #555;
-        color: #fff;
+        background-color: #ccc;
       }
       #listNav li a.active {
-        background-color: #FFBB4D;
-        color: #000;
+        color: #fff;
+        background-color: #3584E4;
+      }
+      #listNav li a.active:hover {
+        background-color: #2868B6;
       }
 
       #helpDialog {
@@ -189,6 +195,7 @@
           padding: 0.5em;
           border: 1px solid #c0c0c0;
           margin-top: 0.5em;
+          border-radius:.4em;
       }
 
       td, th {
@@ -236,7 +243,7 @@
 
       @media (prefers-color-scheme: dark) {
         body {
-          background-color: #111;
+          background-color: #2b2b2b;
           color: #bbb;
         }
         pre {
@@ -253,18 +260,19 @@
           border-color:#2A2A2A;
         }
         #listNav {
-          background-color: #333;
+          color: #fff;
+          background-color: #2b2b2b;
         }
         #listNav li a {
           color: #fff;
+          background-color: #404040;
         }
         #listNav li a:hover {
-          background-color: #555;
+          background-color: #4c4c4c;
           color: #fff;
         }
-        #listNav li a.active {
-          background-color: #FFBB4D;
-          color: #000;
+        #listNav li a.active:hover {
+          background-color: #639BF4;
         }
         #listSearchResults li.selected {
           background-color: #000;
@@ -313,44 +321,7 @@
   <body>
     <nav>
       <a class="logo" href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140">
-        <g fill="#F7A41D">
-          <g>
-            <polygon points="46,22 28,44 19,30"/>
-            <polygon points="46,22 33,33 28,44 22,44 22,95 31,95 20,100 12,117 0,117 0,22" shape-rendering="crispEdges"/>
-            <polygon points="31,95 12,117 4,106"/>
-          </g>
-          <g>
-            <polygon points="56,22 62,36 37,44"/>
-            <polygon points="56,22 111,22 111,44 37,44 56,32" shape-rendering="crispEdges"/>
-            <polygon points="116,95 97,117 90,104"/>
-            <polygon points="116,95 100,104 97,117 42,117 42,95" shape-rendering="crispEdges"/>
-            <polygon points="150,0 52,117 3,140 101,22"/>
-          </g>
-          <g>
-            <polygon points="141,22 140,40 122,45"/>
-            <polygon points="153,22 153,117 106,117 120,105 125,95 131,95 131,45 122,45 132,36 141,22" shape-rendering="crispEdges"/>
-            <polygon points="125,95 130,110 106,117"/>
-          </g>
-        </g>
-        <style>
-        #text { fill: #121212 }
-        @media (prefers-color-scheme: dark) { #text { fill: #f2f2f2 } }
-        </style>
-        <g id="text">
-          <g>
-            <polygon points="260,22 260,37 229,40 177,40 177,22" shape-rendering="crispEdges"/>
-            <polygon points="260,37 207,99 207,103 176,103 229,40 229,37"/>
-            <polygon points="261,99 261,117 176,117 176,103 206,99" shape-rendering="crispEdges"/>
-          </g>
-          <rect x="272" y="22" shape-rendering="crispEdges" width="22" height="95"/>
-          <g>
-            <polygon points="394,67 394,106 376,106 376,81 360,70 346,67" shape-rendering="crispEdges"/>
-            <polygon points="360,68 376,81 346,67"/>
-            <path d="M394,106c-10.2,7.3-24,12-37.7,12c-29,0-51.1-20.8-51.1-48.3c0-27.3,22.5-48.1,52-48.1    c14.3,0,29.2,5.5,38.9,14l-13,15c-7.1-6.3-16.8-10-25.9-10c-17,0-30.2,12.9-30.2,29.5c0,16.8,13.3,29.6,30.3,29.6    c5.7,0,12.8-2.3,19-5.5L394,106z"/>
-          </g>
-        </g>
-        </svg>
+        <img src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA0MDAgMTQwIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzdHlsZT4KICAgICAgICAjdGV4dCB7IGZpbGw6ICMxMjEyMTIgfQogICAgICAgIEBtZWRpYSAocHJlZmVycy1jb2xvci1zY2hlbWU6IGRhcmspIHsgI3RleHQgeyBmaWxsOiAjZjJmMmYyIH0gfQogICAgICAgIDwvc3R5bGU+PHJlY3QgeD0iMTA5LjA2IiB5PSIxMC4xNjYiIHdpZHRoPSIxODEuODkiIGhlaWdodD0iMTE5LjY3IiByeT0iMTguMDc3IiBmaWxsPSIjNDA0MDQwIiBzdHJva2U9IiMyOTc4ZTIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1vcGFjaXR5PSIuODk4MDQiIHN0cm9rZS13aWR0aD0iOSIvPjxwYXRoIGQ9Im0xMzguMzEgNTMuMzIydjMyLjU0M2g2LjgzOTNjNS43NzQyIDAgOS45OTc0LTEuMzA4MSAxMi42Ny0zLjkyNDIgMi42OTA5LTIuNjE2MSA0LjAzNjMtNi43NDU5IDQuMDM2My0xMi4zODkgMC01LjYwNi0xLjM0NTQtOS43MDc3LTQuMDM2My0xMi4zMDUtMi42NzIyLTIuNjE2MS02Ljg5NTQtMy45MjQyLTEyLjY3LTMuOTI0MnptLTUuNjYyMS00LjY1M2gxMS42MzJjOC4xMSAwIDE0LjA2MiAxLjY5MTEgMTcuODU1IDUuMDczNCAzLjc5MzQgMy4zNjM2IDUuNjkwMSA4LjYzMzMgNS42OTAxIDE1LjgwOSAwIDcuMjEzMS0xLjkwNiAxMi41MTEtNS43MTgxIDE1Ljg5My0zLjgxMjEgMy4zODIzLTkuNzU0NSA1LjA3MzQtMTcuODI3IDUuMDczNGgtMTEuNjMyem01NS41MDUgNDEuODQ5LTE1Ljk3Ny00MS44NDloNS45MTQzbDEzLjI1OCAzNS4yMzQgMTMuMjg2LTM1LjIzNGg1Ljg4NjNsLTE1Ljk0OSA0MS44NDl6bTI5LjM1My00MS44NDloNS42OTAxdjI1LjQyM2MwIDQuNDg0OCAwLjgxMjg3IDcuNzE3NiAyLjQzODYgOS42OTg0IDEuNjI1NyAxLjk2MjEgNC4yNjA2IDIuOTQzMiA3LjkwNDUgMi45NDMyIDMuNjI1MiAwIDYuMjUwNy0wLjk4MTA1IDcuODc2NC0yLjk0MzIgMS42MjU3LTEuOTgwOCAyLjQzODYtNS4yMTM2IDIuNDM4Ni05LjY5ODR2LTI1LjQyM2g1LjY5MDF2MjYuMTI0YzAgNS40NTY1LTEuMzU0OCA5LjU3NjktNC4wNjQ0IDEyLjM2MS0yLjY5MDkgMi43ODQzLTYuNjcxMiA0LjE3NjUtMTEuOTQxIDQuMTc2NS01LjI4ODMgMC05LjI4NzMtMS4zOTIyLTExLjk5Ny00LjE3NjUtMi42OTA5LTIuNzg0My00LjAzNjMtNi45MDQ3LTQuMDM2My0xMi4zNjF6bTQ0LjE4MSAwaDUuNjYyMXY0MS44NDloLTUuNjYyMXoiIGZpbGw9IiNmMmYyZjIiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1vcGFjaXR5PSIuODk4MDQiIHN0cm9rZS13aWR0aD0iMTcuMTQxIiBhcmlhLWxhYmVsPSJEVlVJIi8+PC9zdmc+Cg==">
       </a>
     </nav>
     <div id="navWrap">
