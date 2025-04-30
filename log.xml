@@ -5,7 +5,23 @@
   <description>Development Log for DVUI</description>
   <generator>Zine -- https://zine-ssg.io</generator>
   <language>en-us</language>
-  <lastBuildDate>Tue, 01 Apr 2025 19:29:02 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 30 Apr 2025 19:16:46 +0000</lastBuildDate>
+  
+    <item>
+     <pubDate>Wed, 30 Apr 2025 00:00:00 +0000</pubDate>
+     <link>https://david-vanderson.github.io/log/#2025-04-30</link>
+     <guid>https://david-vanderson.github.io/log/#2025-04-30</guid>
+     <title>type-based intent
+</title>
+     <description>&lt;div id=&quot;2025-04-30&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-04-30&quot;&gt;type-based intent&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We recently split &lt;code&gt;Texture&lt;/code&gt; into two types: &lt;code&gt;Texture&lt;/code&gt; and &lt;code&gt;TextureTarget&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Both have the same fields (pointer, width, height), so what gives?&lt;/p&gt;&lt;p&gt;Backends make two varieties of textures:  “Normal” ones that are drawn &lt;strong&gt;from&lt;/strong&gt;, and “Target” ones that are drawn &lt;strong&gt;to&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;Some backends (web, raylib) treat these interchangeably.  But sdl can’t read from a “Normal”, and dx11 can’t draw from a “Target”.&lt;/p&gt;&lt;p&gt;Generally the type you get from the backend is the same, but there is a bit of state associated with it.  We could have done the same:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;pub const Texture = struct {
+    is_target: bool,
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But then we have to check that field (easy to mess up), and have a way to notify developers if they used the wrong kind in the wrong place.&lt;/p&gt;&lt;h4&gt;Type-based Intent&lt;/h4&gt;&lt;p&gt;We are now putting that bit of state into the type:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;// this is always &amp;quot;normal&amp;quot;
+pub const Texture = struct { ... };
+
+// this is always &amp;quot;target&amp;quot;
+pub const TextureTarget = struct { ... };
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now you get a compile error when trying to use the wrong one in the wrong place.  Great!&lt;/p&gt;&lt;/div&gt;</description>
+    </item>
   
     <item>
      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
