@@ -5,7 +5,16 @@
   <description>Development Log for DVUI</description>
   <generator>Zine -- https://zine-ssg.io</generator>
   <language>en-us</language>
-  <lastBuildDate>Wed, 30 Apr 2025 19:16:46 +0000</lastBuildDate>
+  <lastBuildDate>Fri, 02 May 2025 17:13:30 +0000</lastBuildDate>
+  
+    <item>
+     <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
+     <link>https://david-vanderson.github.io/log/#2025-05-01</link>
+     <guid>https://david-vanderson.github.io/log/#2025-05-01</guid>
+     <title>April 2025
+</title>
+     <description>&lt;div id=&quot;2025-05-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-05-01&quot;&gt;April 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Special thank you this month to Teodor Källman, who implemented:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Testing&lt;ul&gt;&lt;li&gt;we can now run gui tests as normal zig tests&lt;/li&gt;&lt;li&gt;testing backend that runs headless&lt;/li&gt;&lt;li&gt;github actions to run the builtin tests&lt;/li&gt;&lt;li&gt;snapshot images for ensuring no visible changes&lt;/li&gt;&lt;li&gt;documentation images produced from tests&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Scripting&lt;ul&gt;&lt;li&gt;gui interactions can be automated for testing/scripting&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Dx11 backend render targets&lt;/li&gt;&lt;li&gt;Animation easing functions&lt;/li&gt;&lt;li&gt;Rounded corners on textures&lt;/li&gt;&lt;li&gt;App&lt;ul&gt;&lt;li&gt;higher-level interface for using dvui&lt;/li&gt;&lt;li&gt;dvui runs the mainloop (you provide a few callbacks)&lt;/li&gt;&lt;li&gt;app can be run on multiple backends&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to @Yinameah for making the docs look much better!&lt;/p&gt;&lt;p&gt;7 people contributed this month with 227 commits.&lt;/p&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+    </item>
   
     <item>
      <pubDate>Wed, 30 Apr 2025 00:00:00 +0000</pubDate>
@@ -29,7 +38,7 @@ pub const TextureTarget = struct { ... };
      <guid>https://david-vanderson.github.io/log/#2025-04-01</guid>
      <title>March 2025
 </title>
-     <description>&lt;div id=&quot;2025-04-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-04-01&quot;&gt;March 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;dvui got a bunch of new stuff this month:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;combobox (combines textEntry and dropdown)&lt;/li&gt;&lt;li&gt;suggestions (choices that show dynamically under a textEntry)&lt;/li&gt;&lt;li&gt;tooltips&lt;/li&gt;&lt;li&gt;web file upload&lt;/li&gt;&lt;li&gt;simple plots&lt;/li&gt;&lt;li&gt;kerning&lt;/li&gt;&lt;li&gt;horizontal mouse wheel support&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Plus a whole ton of minor fixes and enhancements.&lt;/p&gt;&lt;p&gt;We had 6 people contribute code this month!&lt;/p&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+     <description>&lt;div id=&quot;2025-04-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-04-01&quot;&gt;March 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;dvui got a bunch of new stuff this month:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;combobox (combines textEntry and dropdown)&lt;/li&gt;&lt;li&gt;suggestions (choices that show dynamically under a textEntry)&lt;/li&gt;&lt;li&gt;tooltips&lt;/li&gt;&lt;li&gt;web file upload&lt;/li&gt;&lt;li&gt;simple plots&lt;/li&gt;&lt;li&gt;kerning&lt;/li&gt;&lt;li&gt;horizontal mouse wheel support&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Plus a whole ton of minor fixes and enhancements.&lt;/p&gt;&lt;p&gt;We had 6 people contribute this month!&lt;/p&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
     </item>
   
     <item>
