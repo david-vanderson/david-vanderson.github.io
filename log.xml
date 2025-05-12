@@ -5,7 +5,16 @@
   <description>Development Log for DVUI</description>
   <generator>Zine -- https://zine-ssg.io</generator>
   <language>en-us</language>
-  <lastBuildDate>Fri, 02 May 2025 17:13:30 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 12 May 2025 16:54:48 +0000</lastBuildDate>
+  
+    <item>
+     <pubDate>Mon, 12 May 2025 00:00:00 +0000</pubDate>
+     <link>https://david-vanderson.github.io/log/#2025-05-12</link>
+     <guid>https://david-vanderson.github.io/log/#2025-05-12</guid>
+     <title>Taking Units Seriously
+</title>
+     <description>&lt;div id=&quot;2025-05-12&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-05-12&quot;&gt;Taking Units Seriously&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;DVUI’s main geometry struct is a &lt;code&gt;Rect&lt;/code&gt; (rectangle with x,y and width/height).  But what are the units?&lt;/p&gt;&lt;p&gt;We have 3 common units:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Physical Pixels&lt;ul&gt;&lt;li&gt;1-to-1 with screen/output pixels&lt;/li&gt;&lt;li&gt;dvui events and drawing use this&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Natural Pixels&lt;ul&gt;&lt;li&gt;approximately 72 per inch&lt;/li&gt;&lt;li&gt;will be different from Physical on hidpi screens&lt;/li&gt;&lt;li&gt;modified by content scaling&lt;/li&gt;&lt;li&gt;dvui floating windows/widgets use this&lt;/li&gt;&lt;li&gt;OS events generally use this&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Logical Pixels&lt;ul&gt;&lt;li&gt;local coordinates possibly modified by parent widgets&lt;/li&gt;&lt;li&gt;ScaleWidget changes this&lt;/li&gt;&lt;li&gt;normal widgets use this&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For example, you might specify a &lt;code&gt;textEntry&lt;/code&gt; with a font that is 16px tall and &lt;code&gt;.min_content_size = .{ .w = 100 }&lt;/code&gt;.  Those are logical pixels, so they mean something together, but don’t say anything about how large it will be on the screen.&lt;/p&gt;&lt;p&gt;To convert, widgets call &lt;code&gt;WidgetData.rectScale()&lt;/code&gt; (or similar) which calls &lt;code&gt;parent.screenRectScale()&lt;/code&gt; to get a &lt;code&gt;RectScale&lt;/code&gt;.  That is a physical rect plus a scale, and represents a rectangle of screen pixels and the scale factor between logical and physical pixels.&lt;/p&gt;&lt;p&gt;From the beginning we’ve had a steady stream of units errors because the units were implicit.&lt;/p&gt;&lt;h4&gt;Making Units Explicit&lt;/h4&gt;&lt;p&gt;We’re trying out adding units to the types.  Now we have:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Rect (Logical)&lt;/li&gt;&lt;li&gt;Rect.Physical&lt;/li&gt;&lt;li&gt;Rect.Natural&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For example &lt;code&gt;RectScale.rectToPhysical()&lt;/code&gt; converts from a (logical) Rect to Rect.Physical.  &lt;code&gt;Rect.scale()&lt;/code&gt; now requires a unit type representing the units being converted to.&lt;/p&gt;&lt;p&gt;The drawing functions all take Rect.Physical, and the floating functions take Rect.Natural, hopefully making most units errors into compile errors.&lt;/p&gt;&lt;p&gt;This has already caught a few bugs, and I’m hoping it helps going forward.&lt;/p&gt;&lt;/div&gt;</description>
+    </item>
   
     <item>
      <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
