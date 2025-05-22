@@ -1,0 +1,93 @@
+<rss version="2.0">
+  <channel>
+    <title>DVUI</title>
+    <link>https://david-vanderson.github.io</link>
+    <description>DVUI - Devlog</description>
+    <generator>Zine -- https://zine-ssg.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 22 May 2025 17:09:10 +0000</lastBuildDate>
+    
+      
+        <item>
+          <title>In the Wild: Layer Failure
+</title>
+          <description>&lt;div id=&quot;2025-05-22&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-05-22&quot;&gt;In the Wild: Layer Failure&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://david-vanderson.github.io/log/2025/fail_layer.gif&quot;&gt;&lt;/p&gt;&lt;p&gt;What’s going on here:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;I touch “cancel”&lt;/li&gt;&lt;li&gt;Dialog goes away&lt;/li&gt;&lt;li&gt;My touch &lt;em&gt;also&lt;/em&gt; clicks the button underneath “cancel”&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;In the end a store assistant came over and knew some other place on the screen you could touch to get rid of the dialog.&lt;/p&gt;&lt;p&gt;This kind of thing is why DVUI put a lot of work into the interaction between events and subwindows (dvui’s layers).&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-05-22</link>
+          <pubDate>Thu, 22 May 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-05-22</guid>
+        </item>
+      
+        <item>
+          <title>Taking Units Seriously
+</title>
+          <description>&lt;div id=&quot;2025-05-12&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-05-12&quot;&gt;Taking Units Seriously&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;DVUI’s main geometry struct is a &lt;code&gt;Rect&lt;/code&gt; (rectangle with x,y and width/height).  But what are the units?&lt;/p&gt;&lt;p&gt;We have 3 common units:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Physical Pixels&lt;ul&gt;&lt;li&gt;1-to-1 with screen/output pixels&lt;/li&gt;&lt;li&gt;dvui events and drawing use this&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Natural Pixels&lt;ul&gt;&lt;li&gt;approximately 72 per inch&lt;/li&gt;&lt;li&gt;will be different from Physical on hidpi screens&lt;/li&gt;&lt;li&gt;modified by content scaling&lt;/li&gt;&lt;li&gt;dvui floating windows/widgets use this&lt;/li&gt;&lt;li&gt;OS events generally use this&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Logical Pixels&lt;ul&gt;&lt;li&gt;local coordinates possibly modified by parent widgets&lt;/li&gt;&lt;li&gt;ScaleWidget changes this&lt;/li&gt;&lt;li&gt;normal widgets use this&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For example, you might specify a &lt;code&gt;textEntry&lt;/code&gt; with a font that is 16px tall and &lt;code&gt;.min_content_size = .{ .w = 100 }&lt;/code&gt;.  Those are logical pixels, so they mean something together, but don’t say anything about how large it will be on the screen.&lt;/p&gt;&lt;p&gt;To convert, widgets call &lt;code&gt;WidgetData.rectScale()&lt;/code&gt; (or similar) which calls &lt;code&gt;parent.screenRectScale()&lt;/code&gt; to get a &lt;code&gt;RectScale&lt;/code&gt;.  That is a physical rect plus a scale, and represents a rectangle of screen pixels and the scale factor between logical and physical pixels.&lt;/p&gt;&lt;p&gt;From the beginning we’ve had a steady stream of units errors because the units were implicit.&lt;/p&gt;&lt;h4&gt;Making Units Explicit&lt;/h4&gt;&lt;p&gt;We’re trying out adding units to the types.  Now we have:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Rect (Logical)&lt;/li&gt;&lt;li&gt;Rect.Physical&lt;/li&gt;&lt;li&gt;Rect.Natural&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For example &lt;code&gt;RectScale.rectToPhysical()&lt;/code&gt; converts from a (logical) Rect to Rect.Physical.  &lt;code&gt;Rect.scale()&lt;/code&gt; now requires a unit type representing the units being converted to.&lt;/p&gt;&lt;p&gt;The drawing functions all take Rect.Physical, and the floating functions take Rect.Natural, hopefully making most units errors into compile errors.&lt;/p&gt;&lt;p&gt;This has already caught a few bugs, and I’m hoping it helps going forward.&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-05-12</link>
+          <pubDate>Mon, 12 May 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-05-12</guid>
+        </item>
+      
+        <item>
+          <title>April 2025
+</title>
+          <description>&lt;div id=&quot;2025-05-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-05-01&quot;&gt;April 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Special thank you this month to Teodor Källman, who implemented:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Testing&lt;ul&gt;&lt;li&gt;we can now run gui tests as normal zig tests&lt;/li&gt;&lt;li&gt;testing backend that runs headless&lt;/li&gt;&lt;li&gt;github actions to run the builtin tests&lt;/li&gt;&lt;li&gt;snapshot images for ensuring no visible changes&lt;/li&gt;&lt;li&gt;documentation images produced from tests&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Scripting&lt;ul&gt;&lt;li&gt;gui interactions can be automated for testing/scripting&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Dx11 backend render targets&lt;/li&gt;&lt;li&gt;Animation easing functions&lt;/li&gt;&lt;li&gt;Rounded corners on textures&lt;/li&gt;&lt;li&gt;App&lt;ul&gt;&lt;li&gt;higher-level interface for using dvui&lt;/li&gt;&lt;li&gt;dvui runs the mainloop (you provide a few callbacks)&lt;/li&gt;&lt;li&gt;app can be run on multiple backends&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to @Yinameah for making the docs look much better!&lt;/p&gt;&lt;p&gt;7 people contributed this month with 227 commits.&lt;/p&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-05-01</link>
+          <pubDate>Thu, 01 May 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-05-01</guid>
+        </item>
+      
+        <item>
+          <title>type-based intent
+</title>
+          <description>&lt;div id=&quot;2025-04-30&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-04-30&quot;&gt;type-based intent&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We recently split &lt;code&gt;Texture&lt;/code&gt; into two types: &lt;code&gt;Texture&lt;/code&gt; and &lt;code&gt;TextureTarget&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Both have the same fields (pointer, width, height), so what gives?&lt;/p&gt;&lt;p&gt;Backends make two varieties of textures:  “Normal” ones that are drawn &lt;strong&gt;from&lt;/strong&gt;, and “Target” ones that are drawn &lt;strong&gt;to&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;Some backends (web, raylib) treat these interchangeably.  But sdl can’t read from a “Normal”, and dx11 can’t draw from a “Target”.&lt;/p&gt;&lt;p&gt;Generally the type you get from the backend is the same, but there is a bit of state associated with it.  We could have done the same:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;pub const Texture = struct {
+    is_target: bool,
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;But then we have to check that field (easy to mess up), and have a way to notify developers if they used the wrong kind in the wrong place.&lt;/p&gt;&lt;h4&gt;Type-based Intent&lt;/h4&gt;&lt;p&gt;We are now putting that bit of state into the type:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;// this is always &amp;quot;normal&amp;quot;
+pub const Texture = struct { ... };
+
+// this is always &amp;quot;target&amp;quot;
+pub const TextureTarget = struct { ... };
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now you get a compile error when trying to use the wrong one in the wrong place.  Great!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-04-30</link>
+          <pubDate>Wed, 30 Apr 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-04-30</guid>
+        </item>
+      
+        <item>
+          <title>March 2025
+</title>
+          <description>&lt;div id=&quot;2025-04-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-04-01&quot;&gt;March 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;dvui got a bunch of new stuff this month:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;combobox (combines textEntry and dropdown)&lt;/li&gt;&lt;li&gt;suggestions (choices that show dynamically under a textEntry)&lt;/li&gt;&lt;li&gt;tooltips&lt;/li&gt;&lt;li&gt;web file upload&lt;/li&gt;&lt;li&gt;simple plots&lt;/li&gt;&lt;li&gt;kerning&lt;/li&gt;&lt;li&gt;horizontal mouse wheel support&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Plus a whole ton of minor fixes and enhancements.&lt;/p&gt;&lt;p&gt;We had 6 people contribute this month!&lt;/p&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-04-01</link>
+          <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-04-01</guid>
+        </item>
+      
+        <item>
+          <title>double click, long tap, and friction
+</title>
+          <description>&lt;div id=&quot;2025-03-11&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-03-11&quot;&gt;double click, long tap, and friction&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;dvui does not currently have built-in support for double-click, double-tap, or long-tap.  My current thinking is that those interaction patterns are generally worse than the alternatives.&lt;/p&gt;&lt;p&gt;The general advantage of these is to have a second way to interact with a widget besides a normal click/tap.  Otherwise you need a separate widget, or the widget be modal, or change depending on zoom level, or some other redesign.&lt;/p&gt;&lt;p&gt;The downsides are poor discoverability and accessibility.  I’ve personally had the experience of trying to double-click or long-tap something, nothing happens, and I’m left unsure if it doesn’t exist or if I did the interaction wrong.&lt;/p&gt;&lt;p&gt;I’ve watched people with slight hand shakiness try to long-tap repeatedly but only ever get a touch-drag.&lt;/p&gt;&lt;p&gt;This is why dvui’s textLayout and textEntry widgets provide a modal touch interface.  A single tap transitions between normal mode and selection mode.&lt;/p&gt;&lt;p&gt;They do have mouse-only 2-click word select and 3-click line select.  Those are features that are useful to some while not requiring use by all.&lt;/p&gt;&lt;h4&gt;How much should my opinions shape dvui’s design?&lt;/h4&gt;&lt;p&gt;On one hand dvui must serve its users (developers) in providing the UI features they need and want.&lt;/p&gt;&lt;p&gt;On the other hand dvui should serve its users by making it easier to build good UIs than bad ones.  Nobody wants a button that by default only responds to a triple-click.&lt;/p&gt;&lt;p&gt;My strategy is to make requested features possible, but use my experience to guide developers by making some features easier to use than others.&lt;/p&gt;&lt;p&gt;We see a similar strategy in Zig design, where the core team uses “friction” to guide developers - some patterns are intentionally left more awkward to use than others to discorage their use while not preventing it outright.&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-03-11</link>
+          <pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-03-11</guid>
+        </item>
+      
+        <item>
+          <title>min_size_content is not the minimum
+</title>
+          <description>&lt;div id=&quot;2025-02-23&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-02-23&quot;&gt;min_size_content is not the minimum&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;If the parent does not have enough space, child widgets get less than their min size.&lt;/p&gt;&lt;p&gt;What about &lt;strong&gt;max_size_content&lt;/strong&gt; - can a widget get more?&lt;/p&gt;&lt;p&gt;Yes - if that widget is expanded, it can be larger than max_size_content.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;min_size_content&lt;/strong&gt; and &lt;strong&gt;max_size_content&lt;/strong&gt; are both constraints imposed on the minimum size that dvui saves for each widget from frame to frame.&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-02-23</link>
+          <pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-02-23</guid>
+        </item>
+      
+        <item>
+          <title>Why min_size_content?
+</title>
+          <description>&lt;div id=&quot;2025-02-22&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-02-22&quot;&gt;Why min_size_content?&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;To make it clear that padding/border/margin is added on top of that.&lt;/p&gt;&lt;p&gt;Why not just &lt;strong&gt;min_size&lt;/strong&gt;?&lt;/p&gt;&lt;p&gt;This is an example of naming tension in API design.&lt;/p&gt;&lt;p&gt;When you want a widget to be larger than its minimum size (but not expanded):&lt;/p&gt;&lt;pre&gt;&lt;code&gt;.{ .min_size_content = .{ .w = 100, .h = 50 } }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We could make it shorter and easier to remember by using just &lt;strong&gt;min_size&lt;/strong&gt;, but then you have to remember (or lookup) if that already includes padding/border/margin.&lt;/p&gt;&lt;p&gt;So &lt;strong&gt;min_size_content&lt;/strong&gt; costs more characters but makes reading the code (especially for people new to DVUI) slightly easier.&lt;/p&gt;&lt;p&gt;Hard to know which way to go, but I think about stuff like this a lot.&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-02-22</link>
+          <pubDate>Sat, 22 Feb 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-02-22</guid>
+        </item>
+      
+    
+  </channel>
+</rss>

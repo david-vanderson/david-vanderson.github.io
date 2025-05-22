@@ -1,110 +1,55 @@
 <!DOCTYPE html>
-<title id="title">DVUI Devlog</title>
-<head id="head">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/fonts.css">
-    <link rel="stylesheet" type="text/css" href="/fira_code.css">
-    <link rel="stylesheet" type="text/css" href="/style.css">
-    <link rel="stylesheet" type="text/css" href="/highlight.css">
+<html>
+  <head id="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="/style.css">
+    <link type="text/css" rel="stylesheet" href="/highlight.css">
+    
   <style>
-    #page h2,
-    #page h3 {
-        text-align: left;
+    .date {
+      font-size: 0.9em;
     }
-
-    #page h2 {
-        font-size: 1.7rem;
-        border-bottom: 1px dashed #aaa;
-        margin-top: 2em;
-    }
-
-    #page h3 {
-        font-size: 1.5rem;
-    }
-
-    #page h4 {
-        font-size: 1rem;
-    }
-
-    .title,
-    .subtitle {
-        margin-bottom: 0;
-    }
-
-    .subtitle,
-    .tagline {
-        margin-top: 0;
-    }
-
-    .title {
-        font-size: 3rem;
-    }
-
-    .subtitle {
-        font-size: 2rem;
-    }
-
-    .tagline {
-        font-size: 1rem;
-        font-style: italic;
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        padding: 2px 5px;
-        text-align: center;
-    }
-
-    .get-started {
-        font-family: 'Bebas Neue', sans-serif;
-        font-weight: normal;
-        font-size: 2rem;
-        text-align: center;
-        margin: 1em;
-    }
-
-    .get-started a {
-        color: black;
-        font-weight: normal;
-        background-color: #ccc;
-        border: 1px solid #ccc;
-        padding: 3px 10px;
-        text-decoration: none;
-    }
-
-    .get-started a:hover {
-        background-color: white;
+    
+    .title h3{
+      margin-top: 0;
     }
   </style>
-</head>
-<body>
-    <nav id="menu" class="centered">
-      <a href="/">Home</a>
-      -
-      <a href="/demo/">Demo</a>
-      -
-      <a href="/docs/">Documentation</a>
-      -
-      <a href="/community/">Community</a>
-      -
-      <a href="/log/">Devlog</a>
-      -
-      <a href="https://github.com/david-vanderson/dvui" target="_blank">
-        Code
-      </a>
-    </nav>
-<div id="content">
-    <h1 class="centered title"><img src="/dvui.png"></h1>
-    <h2 class="centered subtitle" id="subtitle">Devlog</h2>
-  <div id="page">  <p>
-    <a href="/log.xml">RSS Feed</a>
-  </p>
-<div id="2025-05-12"><h2><a class="" href="#2025-05-12">Taking Units Seriously</a></h2><p>DVUI’s main geometry struct is a <code>Rect</code> (rectangle with x,y and width/height).  But what are the units?</p><p>We have 3 common units:</p><ul><li>Physical Pixels<ul><li>1-to-1 with screen/output pixels</li><li>dvui events and drawing use this</li></ul></li><li>Natural Pixels<ul><li>approximately 72 per inch</li><li>will be different from Physical on hidpi screens</li><li>modified by content scaling</li><li>dvui floating windows/widgets use this</li><li>OS events generally use this</li></ul></li><li>Logical Pixels<ul><li>local coordinates possibly modified by parent widgets</li><li>ScaleWidget changes this</li><li>normal widgets use this</li></ul></li></ul><p>For example, you might specify a <code>textEntry</code> with a font that is 16px tall and <code>.min_content_size = .{ .w = 100 }</code>.  Those are logical pixels, so they mean something together, but don’t say anything about how large it will be on the screen.</p><p>To convert, widgets call <code>WidgetData.rectScale()</code> (or similar) which calls <code>parent.screenRectScale()</code> to get a <code>RectScale</code>.  That is a physical rect plus a scale, and represents a rectangle of screen pixels and the scale factor between logical and physical pixels.</p><p>From the beginning we’ve had a steady stream of units errors because the units were implicit.</p><h4>Making Units Explicit</h4><p>We’re trying out adding units to the types.  Now we have:</p><ul><li>Rect (Logical)</li><li>Rect.Physical</li><li>Rect.Natural</li></ul><p>For example <code>RectScale.rectToPhysical()</code> converts from a (logical) Rect to Rect.Physical.  <code>Rect.scale()</code> now requires a unit type representing the units being converted to.</p><p>The drawing functions all take Rect.Physical, and the floating functions take Rect.Natural, hopefully making most units errors into compile errors.</p><p>This has already caught a few bugs, and I’m hoping it helps going forward.</p></div><div id="2025-05-01"><h2><a class="" href="#2025-05-01">April 2025</a></h2><p>Special thank you this month to Teodor Källman, who implemented:</p><ul><li>Testing<ul><li>we can now run gui tests as normal zig tests</li><li>testing backend that runs headless</li><li>github actions to run the builtin tests</li><li>snapshot images for ensuring no visible changes</li><li>documentation images produced from tests</li></ul></li><li>Scripting<ul><li>gui interactions can be automated for testing/scripting</li></ul></li><li>Dx11 backend render targets</li><li>Animation easing functions</li><li>Rounded corners on textures</li><li>App<ul><li>higher-level interface for using dvui</li><li>dvui runs the mainloop (you provide a few callbacks)</li><li>app can be run on multiple backends</li></ul></li></ul><p>Thank you to @Yinameah for making the docs look much better!</p><p>7 people contributed this month with 227 commits.</p><p>Thank you to everyone who asked questions, filed issues, and contributed!</p></div><div id="2025-04-30"><h2><a class="" href="#2025-04-30">type-based intent</a></h2><p>We recently split <code>Texture</code> into two types: <code>Texture</code> and <code>TextureTarget</code>.</p><p>Both have the same fields (pointer, width, height), so what gives?</p><p>Backends make two varieties of textures:  “Normal” ones that are drawn <strong>from</strong>, and “Target” ones that are drawn <strong>to</strong>.</p><p>Some backends (web, raylib) treat these interchangeably.  But sdl can’t read from a “Normal”, and dx11 can’t draw from a “Target”.</p><p>Generally the type you get from the backend is the same, but there is a bit of state associated with it.  We could have done the same:</p><pre><code>pub const Texture = struct {
-    is_target: bool,
-</code></pre><p>But then we have to check that field (easy to mess up), and have a way to notify developers if they used the wrong kind in the wrong place.</p><h4>Type-based Intent</h4><p>We are now putting that bit of state into the type:</p><pre><code>// this is always &quot;normal&quot;
-pub const Texture = struct { ... };
 
-// this is always &quot;target&quot;
-pub const TextureTarget = struct { ... };
-</code></pre><p>Now you get a compile error when trying to use the wrong one in the wrong place.  Great!</p></div><div id="2025-04-01"><h2><a class="" href="#2025-04-01">March 2025</a></h2><p>dvui got a bunch of new stuff this month:</p><ul><li>combobox (combines textEntry and dropdown)</li><li>suggestions (choices that show dynamically under a textEntry)</li><li>tooltips</li><li>web file upload</li><li>simple plots</li><li>kerning</li><li>horizontal mouse wheel support</li></ul><p>Plus a whole ton of minor fixes and enhancements.</p><p>We had 6 people contribute this month!</p><p>Thank you to everyone who asked questions, filed issues, and contributed!</p></div><div id="2025-03-11"><h2><a class="" href="#2025-03-11">double click, long tap, and friction</a></h2><p>dvui does not currently have built-in support for double-click, double-tap, or long-tap.  My current thinking is that those interaction patterns are generally worse than the alternatives.</p><p>The general advantage of these is to have a second way to interact with a widget besides a normal click/tap.  Otherwise you need a separate widget, or the widget be modal, or change depending on zoom level, or some other redesign.</p><p>The downsides are poor discoverability and accessibility.  I’ve personally had the experience of trying to double-click or long-tap something, nothing happens, and I’m left unsure if it doesn’t exist or if I did the interaction wrong.</p><p>I’ve watched people with slight hand shakiness try to long-tap repeatedly but only ever get a touch-drag.</p><p>This is why dvui’s textLayout and textEntry widgets provide a modal touch interface.  A single tap transitions between normal mode and selection mode.</p><p>They do have mouse-only 2-click word select and 3-click line select.  Those are features that are useful to some while not requiring use by all.</p><h4>How much should my opinions shape dvui’s design?</h4><p>On one hand dvui must serve its users (developers) in providing the UI features they need and want.</p><p>On the other hand dvui should serve its users by making it easier to build good UIs than bad ones.  Nobody wants a button that by default only responds to a triple-click.</p><p>My strategy is to make requested features possible, but use my experience to guide developers by making some features easier to use than others.</p><p>We see a similar strategy in Zig design, where the core team uses “friction” to guide developers - some patterns are intentionally left more awkward to use than others to discorage their use while not preventing it outright.</p></div><div id="2025-02-23"><h2><a class="" href="#2025-02-23">min_size_content is not the minimum</a></h2><p>If the parent does not have enough space, child widgets get less than their min size.</p><p>What about <strong>max_size_content</strong> - can a widget get more?</p><p>Yes - if that widget is expanded, it can be larger than max_size_content.</p><p><strong>min_size_content</strong> and <strong>max_size_content</strong> are both constraints imposed on the minimum size that dvui saves for each widget from frame to frame.</p></div><div id="2025-02-22"><h2><a class="" href="#2025-02-22">Why min_size_content?</a></h2><p>To make it clear that padding/border/margin is added on top of that.</p><p>Why not just <strong>min_size</strong>?</p><p>This is an example of naming tension in API design.</p><p>When you want a widget to be larger than its minimum size (but not expanded):</p><pre><code>.{ .min_size_content = .{ .w = 100, .h = 50 } }
-</code></pre><p>We could make it shorter and easier to remember by using just <strong>min_size</strong>, but then you have to remember (or lookup) if that already includes padding/border/margin.</p><p>So <strong>min_size_content</strong> costs more characters but makes reading the code (especially for people new to DVUI) slightly easier.</p><p>Hard to know which way to go, but I think about stuff like this a lot.</p></div></div>
-</div>
-</body>
+  </head>
+  <body id="body">
+    <nav>
+      <a href="/">Home</a>
+       &nbsp; • &nbsp;
+      <a href="/demo/">Demo</a>
+       &nbsp; • &nbsp;
+      <a href="/docs/">Docs</a>
+       &nbsp; • &nbsp;
+      <a href="/community/">Community</a>
+      
+         &nbsp; • &nbsp;
+        <a href="/log/2025/">Devlog</a>
+      
+       &nbsp; • &nbsp;
+      <a href="https://github.com/david-vanderson/dvui">Code</a>
+    </nav>
+    <h1 class="site-title"><img src="/dvui.png" height="120"></h1>
+    <h1 class="site-subtitle"></h1>
+    
+  <h1>DVUI Devlog Archive</h1>
+  <div><p>The latest devlog year is also available <a href="/log/index.xml">via RSS feed</a>.</p></div>
+  <div>
+    <h2>Past years</h2>
+    <div>
+      <span class="date">Year 2025</span>
+      <a class="title" href="/log/2025/">
+        <h3>DVUI Devlog 2025</h3>
+      </a>
+    </div>
+  </div>
+
+    <footer>
+      <hr>
+    </footer>
+  </body>
+</html>
