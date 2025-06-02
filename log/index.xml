@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 22 May 2025 17:09:10 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Jun 2025 17:31:11 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>May 2025
+</title>
+          <description>&lt;div id=&quot;2025-06-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-06-01&quot;&gt;May 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;7&lt;/strong&gt; people contributed this month with &lt;strong&gt;192&lt;/strong&gt; commits.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;nat3&lt;/strong&gt; rewrote and improved our icon rendering and compatibility:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nat3Github/zig-lib-svg2tvg&quot; target=&quot;_blank&quot;&gt;svg2tvg&lt;/a&gt; is now dvui’s icon renderer&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nat3Github/zig-lib-icons&quot; target=&quot;_blank&quot;&gt;icons&lt;/a&gt; hosts many icons in tvg format&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you!&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Paul Hatchman&lt;/strong&gt; wrote an entire GridWidget:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;see “Grid” part of the demo for all the cool functionality&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you!&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Teodor Källman&lt;/strong&gt; was back again:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#2025-05-12&quot;&gt;type safety&lt;/a&gt; for Rect/Size/Point&lt;/li&gt;&lt;li&gt;type safety for pre-multiplied alpha in Color&lt;/li&gt;&lt;li&gt;color picker&lt;/li&gt;&lt;li&gt;debug logging handled and unhandled events&lt;/li&gt;&lt;li&gt;triangles drawing abstraction supporting:&lt;ul&gt;&lt;li&gt;gradients&lt;/li&gt;&lt;li&gt;box shadows&lt;/li&gt;&lt;li&gt;textures with rounded corners&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;snapshots independent of rendering&lt;/li&gt;&lt;li&gt;better documentation image generation&lt;/li&gt;&lt;li&gt;suggestion/combobox filtering&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;See “Styling” part of the demo for the color picker, box shadows, and gradients.&lt;/p&gt;&lt;p&gt;Thank you!&lt;/p&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-06-01</link>
+          <pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-06-01</guid>
+        </item>
       
         <item>
           <title>In the Wild: Layer Failure
