@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2025</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2025-06-04">
+      <span>June 04, 2025</span>
+      <h2><a href="#2025-06-04">Raylib Variable Framerate
+</a></h2>
+      <p>@sooriya on discord recently asked if we could do variable framerate on raylib, and now we can!</p><p>For waiting on an event without any timeout, raylib already had the necessary pieces with EnableEventWaiting().</p><p>For waiting with a timeout, I submitted a proposal PR to raylib, but it was turned down.  So for that we are assuming that raylib is using glfw and we are directly calling glfwWaitEventsTimeout().</p><p>You can get this either by using dvui.App or copying the relevant parts from the updated examples/raylib-standalone.zig.</p><p>It’s not perfect:</p><ul><li>glfwWaitEventsTimeout() doesn’t tell us if it was interrupted or not</li><li>if an event comes between EndDrawing() and glfwWaitEventsTimeout() we will wait anyway</li></ul><p>But it’s good enough for applications that don’t want to peg the cpu.</p>
+    </div>
+  
     <div id="2025-06-01">
       <span>June 01, 2025</span>
       <h2><a href="#2025-06-01">May 2025
