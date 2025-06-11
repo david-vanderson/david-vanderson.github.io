@@ -498,12 +498,12 @@ class Dvui {
                         this.renderTargetSize[0],
                         this.renderTargetSize[1],
                     );
-                    this.gl.scissor(
-                        0,
-                        0,
-                        this.renderTargetSize[0],
-                        this.renderTargetSize[1],
-                    );
+                    //this.gl.scissor(
+                    //    0,
+                    //    0,
+                    //    this.renderTargetSize[0],
+                    //    this.renderTargetSize[1],
+                    //);
                 } else {
                     this.using_fb = true;
                     this.gl.bindFramebuffer(
@@ -528,12 +528,12 @@ class Dvui {
                         this.renderTargetSize[0],
                         this.renderTargetSize[1],
                     );
-                    this.gl.scissor(
-                        0,
-                        0,
-                        this.renderTargetSize[0],
-                        this.renderTargetSize[1],
-                    );
+                    //this.gl.scissor(
+                    //    0,
+                    //    0,
+                    //    this.renderTargetSize[0],
+                    //    this.renderTargetSize[1],
+                    //);
                 }
             },
             wasm_textureDestroy: (id) => {
@@ -565,7 +565,7 @@ class Dvui {
                 if (clip === 1) {
                     // just calling getParameter here is quite slow (5-10 ms per frame according to chrome)
                     //old_scissor = gl.getParameter(gl.SCISSOR_BOX);
-                    this.gl.scissor(x, y, w, h);
+                    //this.gl.scissor(x, y, w, h);
                 }
 
                 this.gl.bindBuffer(
@@ -706,12 +706,12 @@ class Dvui {
 
                 if (clip === 1) {
                     //gl.scissor(old_scissor[0], old_scissor[1], old_scissor[2], old_scissor[3]);
-                    this.gl.scissor(
-                        0,
-                        0,
-                        this.renderTargetSize[0],
-                        this.renderTargetSize[1],
-                    );
+                    //this.gl.scissor(
+                    //    0,
+                    //    0,
+                    //    this.renderTargetSize[0],
+                    //    this.renderTargetSize[1],
+                    //);
                 }
             },
             wasm_cursor: (name_ptr, name_len) => {
@@ -1005,13 +1005,13 @@ class Dvui {
 
         this.gl.enable(this.gl.BLEND);
         this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
-        this.gl.enable(this.gl.SCISSOR_TEST);
-        this.gl.scissor(
-            0,
-            0,
-            this.gl.canvas.clientWidth,
-            this.gl.canvas.clientHeight,
-        );
+        //this.gl.enable(this.gl.SCISSOR_TEST);
+        //this.gl.scissor(
+        //    0,
+        //    0,
+        //    this.gl.canvas.clientWidth,
+        //    this.gl.canvas.clientHeight,
+        //);
     }
 
     init() {
@@ -1081,12 +1081,12 @@ class Dvui {
             this.gl.drawingBufferWidth,
             this.gl.drawingBufferHeight,
         );
-        this.gl.scissor(
-            0,
-            0,
-            this.gl.drawingBufferWidth,
-            this.gl.drawingBufferHeight,
-        );
+        //this.gl.scissor(
+        //    0,
+        //    0,
+        //    this.gl.drawingBufferWidth,
+        //    this.gl.drawingBufferHeight,
+        //);
 
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
