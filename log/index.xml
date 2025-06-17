@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 04 Jun 2025 19:50:27 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jun 2025 17:53:52 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>Removing Errors From Most Functions
+</title>
+          <description>&lt;div id=&quot;2025-06-17&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-06-17&quot;&gt;Removing Errors From Most Functions&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Teodor Källman has successfully removed errors from almost all dvui functions.  Horay!&lt;/p&gt;&lt;p&gt;Now dvui handles most errors internally:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;If the high level API failes to allocate space for a widget, we panic.&lt;ul&gt;&lt;li&gt;The alternative is to allocate the widget on the stack, but it is unclear how that would be better.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;If a widget gets an error while rendering, it logs it and continues.&lt;/li&gt;&lt;li&gt;If a widget gets an allocation error internally (like a label format that goes bad), it logs it and continues.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Some functions like &lt;code&gt;textureCreate()&lt;/code&gt; can still fail.&lt;/p&gt;&lt;p&gt;Up to this point we hadn’t spent much time thinking about errors.  Everybody (that I saw) put &lt;code&gt;try&lt;/code&gt; in front of all dvui functions, and any error took down the whole app.&lt;/p&gt;&lt;p&gt;Now dvui is aiming to be more robust to errors, especially cases under end-user control.&lt;/p&gt;&lt;p&gt;For example, if your gui shows user-controlled text or graphs user data, then we’d like for dvui to not crash if the user tries to show way too much text/info.  Ideally dvui continues running and shows some visual indication that something is wrong, allowing the user to get back out of the situation.&lt;/p&gt;&lt;p&gt;This is the first big push in that direction, and we’ll continue to refine how we handle errors going forward.&lt;/p&gt;&lt;p&gt;If you have an application where dvui error handling is causing problems, I want to know!  Please file an issue.&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-06-17</link>
+          <pubDate>Tue, 17 Jun 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-06-17</guid>
+        </item>
       
         <item>
           <title>Raylib Variable Framerate

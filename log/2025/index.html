@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2025</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2025-06-17">
+      <span>June 17, 2025</span>
+      <h2><a href="#2025-06-17">Removing Errors From Most Functions
+</a></h2>
+      <p>Teodor Källman has successfully removed errors from almost all dvui functions.  Horay!</p><p>Now dvui handles most errors internally:</p><ul><li>If the high level API failes to allocate space for a widget, we panic.<ul><li>The alternative is to allocate the widget on the stack, but it is unclear how that would be better.</li></ul></li><li>If a widget gets an error while rendering, it logs it and continues.</li><li>If a widget gets an allocation error internally (like a label format that goes bad), it logs it and continues.</li></ul><p>Some functions like <code>textureCreate()</code> can still fail.</p><p>Up to this point we hadn’t spent much time thinking about errors.  Everybody (that I saw) put <code>try</code> in front of all dvui functions, and any error took down the whole app.</p><p>Now dvui is aiming to be more robust to errors, especially cases under end-user control.</p><p>For example, if your gui shows user-controlled text or graphs user data, then we’d like for dvui to not crash if the user tries to show way too much text/info.  Ideally dvui continues running and shows some visual indication that something is wrong, allowing the user to get back out of the situation.</p><p>This is the first big push in that direction, and we’ll continue to refine how we handle errors going forward.</p><p>If you have an application where dvui error handling is causing problems, I want to know!  Please file an issue.</p>
+    </div>
+  
     <div id="2025-06-04">
       <span>June 04, 2025</span>
       <h2><a href="#2025-06-04">Raylib Variable Framerate
