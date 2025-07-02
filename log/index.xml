@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 24 Jun 2025 15:27:49 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jul 2025 16:58:38 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>June 2025
+</title>
+          <description>&lt;div id=&quot;2025-07-02&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-07-02&quot;&gt;June 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;8&lt;/strong&gt; people contributed this month with &lt;strong&gt;301&lt;/strong&gt; commits.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Colton Franklin&lt;/strong&gt; contributed a whole tree widget!&lt;/p&gt;&lt;ul&gt;&lt;li&gt;easily show a filesystem or other tree-like data&lt;/li&gt;&lt;li&gt;expanding subtrees&lt;/li&gt;&lt;li&gt;drag-n-drop&lt;/li&gt;&lt;li&gt;see the “Reorder / Tree” section of the demo&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;Teodor Källman&lt;/strong&gt; continued their impressive contributions:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;removing errors on most functions (see &lt;a href=&quot;#2025-06-17&quot;&gt;below&lt;/a&gt;)&lt;ul&gt;&lt;li&gt;error logs with stack traces&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;major overhaul of dvui’s allocations:&lt;ul&gt;&lt;li&gt;shrinking arena wrapper on Zig’s arena allocator&lt;/li&gt;&lt;li&gt;splitting dvui’s allocations to improve peak memory use&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;matching the system light/dark theme by default&lt;/li&gt;&lt;li&gt;tons of backend fixes and enhancements&lt;/li&gt;&lt;li&gt;fixes to prevent using undefined&lt;/li&gt;&lt;li&gt;removing bubbling events (post forthcoming)&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;Paul Hatchman&lt;/strong&gt; put a lot of work into:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;grid features&lt;ul&gt;&lt;li&gt;populate the grid by row or col&lt;/li&gt;&lt;li&gt;resizable columns&lt;/li&gt;&lt;li&gt;sortable columns&lt;/li&gt;&lt;li&gt;keyboard navigation&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;safety checks to prevent use-after-free bugs&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;nat3&lt;/strong&gt; was back:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;image() from rgba bytes&lt;/li&gt;&lt;li&gt;rendering tvg at runtime&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;Meiko&lt;/strong&gt; contributed:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;build.zig changes to improve zls info for backends&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-07-02</link>
+          <pubDate>Wed, 02 Jul 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-07-02</guid>
+        </item>
       
         <item>
           <title>Live Resize on Windows and Mac
