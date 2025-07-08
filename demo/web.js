@@ -190,6 +190,12 @@ class Dvui {
      * list of tuple (touch identifier, initial index)
      * @type {[number, number][]} */
     touches = [];
+    /** The lowest data seen, used to determine the delta for one "tick"
+     * of the scroll wheel
+     *
+     * The first number is x and second is y
+     * @type {[number, number]} */
+    lowest_scroll_delta = [99999, 99999];
     /**
      * x y w h of on screen keyboard editing position, or empty if none
      *
@@ -252,6 +258,7 @@ class Dvui {
 
     constructor() {
         this.hidden_input = document.createElement("input");
+        this.hidden_input.setAttribute("autocapitalize", "none");
         this.hidden_input.style.position = "absolute";
         this.hidden_input.style.left = 0;
         this.hidden_input.style.top = 0;
@@ -1179,20 +1186,30 @@ class Dvui {
         this.gl.canvas.addEventListener("wheel", (ev) => {
             ev.preventDefault();
             if (ev.deltaX != 0) {
+                const min = Math.min(
+                    Math.abs(ev.deltaX),
+                    this.lowest_scroll_delta[0],
+                );
+                this.lowest_scroll_delta[0] = min;
                 this.instance.exports.add_event(
                     4,
                     0,
                     0,
-                    -ev.deltaX,
+                    ev.deltaX / min,
                     0,
                 );
             }
             if (ev.deltaY != 0) {
+                const min = Math.min(
+                    Math.abs(ev.deltaY),
+                    this.lowest_scroll_delta[1],
+                );
+                this.lowest_scroll_delta[1] = min;
                 this.instance.exports.add_event(
                     4,
                     1,
                     0,
-                    ev.deltaY,
+                    -ev.deltaY / min,
                     0,
                 );
             }
@@ -1255,6 +1272,28 @@ class Dvui {
 
         this.hidden_input.addEventListener("beforeinput", (ev) => {
             ev.preventDefault();
+            if (ev.data && !ev.isComposing) {
+                const str = utf8encoder.encode(ev.data);
+                const ptr = this.instance.exports.arena_u8(
+                    str.length,
+                );
+                var dest = new Uint8Array(
+                    this.instance.exports.memory.buffer,
+                    ptr,
+                    str.length,
+                );
+                dest.set(str);
+                this.instance.exports.add_event(
+                    7,
+                    ptr,
+                    str.length,
+                    0,
+                    0,
+                );
+                this.requestRender();
+            }
+        });
+        this.hidden_input.addEventListener("compositionend", (ev) => {
             if (ev.data) {
                 const str = utf8encoder.encode(ev.data);
                 const ptr = this.instance.exports.arena_u8(
@@ -1275,6 +1314,8 @@ class Dvui {
                 );
                 this.requestRender();
             }
+            // Reset value to empty after composition maybe put text there
+            ev.target.value = "";
         });
         this.gl.canvas.addEventListener("touchstart", (ev) => {
             ev.preventDefault();
@@ -1315,7 +1356,9 @@ class Dvui {
                 );
                 this.touches.splice(tidx, 1);
             }
-            this.need_oskCheck = true;
+            // Osk has to be done within the event handler so that on-screen keyboard can show
+            // https://stackoverflow.com/a/6837575
+            this.oskCheck();
             this.requestRender();
         });
         this.gl.canvas.addEventListener("touchmove", (ev) => {
