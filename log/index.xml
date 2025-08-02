@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 10 Jul 2025 01:57:09 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Aug 2025 00:59:00 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>July 2025
+</title>
+          <description>&lt;div id=&quot;2025-08-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-08-01&quot;&gt;July 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;7&lt;/strong&gt; people contributed this month with &lt;strong&gt;229&lt;/strong&gt; commits.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Teodor Källman&lt;/strong&gt; kept the streak alive:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;new theme editor example in the demo&lt;/li&gt;&lt;li&gt;online options editor&lt;ul&gt;&lt;li&gt;override widget Options live to see the changes&lt;/li&gt;&lt;li&gt;open the dvui debug window&lt;/li&gt;&lt;li&gt;select a widget (using Debug Under Mouse)&lt;/li&gt;&lt;li&gt;click “Edit Options” in top right corner&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;In general this month had tons of improvements across the board:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;grid improvements&lt;/li&gt;&lt;li&gt;more uniform scrolling across backends&lt;/li&gt;&lt;li&gt;better scrolling on macos&lt;/li&gt;&lt;li&gt;web: better support for on screen keyboards&lt;/li&gt;&lt;li&gt;demo cleanups&lt;/li&gt;&lt;li&gt;more errors logged to ease development bugs&lt;/li&gt;&lt;li&gt;ImageSource&lt;ul&gt;&lt;li&gt;progress on making &lt;code&gt;image()&lt;/code&gt; smarter about when to regenerate textures&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Options.data_out&lt;ul&gt;&lt;li&gt;general mechanism to extract data about a widget even from a high level api&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Big thanks to everyone who landed at least one commit:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Teodor Källman&lt;/li&gt;&lt;li&gt;Paul Hatchman&lt;/li&gt;&lt;li&gt;nat3&lt;/li&gt;&lt;li&gt;Colton Franklin&lt;/li&gt;&lt;li&gt;Deins&lt;/li&gt;&lt;li&gt;Meiko&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-08-01</link>
+          <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-08-01</guid>
+        </item>
       
         <item>
           <title>Removing Bubbled Events
