@@ -21,17 +21,13 @@ html {
   font-family: "Georgia", serif;
   font-size: 1.2em;
   line-height: 1.6;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   background-color: #111;
 }
 
 body {
-  width: 800px;
+  max-width: 800px;
+  margin: auto;
   padding: 15px;
-  display: flex;
-  flex-direction: column;
 }
 
 .site-title {
@@ -48,9 +44,6 @@ body {
 }
 
 nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
   font-size: 1.2em;
   margin-bottom: 20px;
   margin-left: auto;
@@ -62,8 +55,6 @@ nav {
   padding: 5px 15px;
   margin: 0 10px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
@@ -85,8 +76,6 @@ nav {
 
 footer {
   margin-top: 30px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
