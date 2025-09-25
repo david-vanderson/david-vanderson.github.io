@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 16 Sep 2025 00:10:21 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Sep 2025 02:28:25 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>Large Document Speed
+</title>
+          <description>&lt;div id=&quot;2025-09-24&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-09-24&quot;&gt;Large Document Speed&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We now have fast partial rendering of large text documents in &lt;code&gt;TextLayoutWidget&lt;/code&gt; and &lt;code&gt;TextEntryWidget&lt;/code&gt;.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Load the demo&lt;/li&gt;&lt;li&gt;Go to the “Text Entry” or “Text Layout” sections&lt;/li&gt;&lt;li&gt;Click the “Large Doc” button at top right&lt;/li&gt;&lt;li&gt;Scrolling/Selection/Editing are fast independent of the amount of text&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;The neat thing is the api for feeding text into these widgets is unchanged (thanks &lt;strong&gt;Teodor Källman&lt;/strong&gt;!).&lt;/p&gt;&lt;p&gt;It works generally the way you might expect:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;textLayout records the height after each newline (at least 200px apart)&lt;/li&gt;&lt;li&gt;when passed &lt;code&gt;.cache_layout = true&lt;/code&gt;, it uses the heights from last frame to only render the visible text&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For textEntry editing, it combines the byte range affected by the edits with the visible text.&lt;/p&gt;&lt;p&gt;Things that require passing &lt;code&gt;.cache_layout = false&lt;/code&gt; for a frame:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;changing the text content outside of textEntry&lt;/li&gt;&lt;li&gt;changing the font&lt;/li&gt;&lt;li&gt;changing the font line spacing&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;textLayout detects a few situations automatically:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;natural scale of app changes&lt;/li&gt;&lt;li&gt;break_lines changes&lt;/li&gt;&lt;li&gt;width changes when break_lines is true&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;dvui is starting to be reasonable for file editing!&lt;/p&gt;&lt;p&gt;If you have any questions or problems, please ask on Discord or file an issue/discussion on Github.  Thanks!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-09-24</link>
+          <pubDate>Wed, 24 Sep 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-09-24</guid>
+        </item>
       
         <item>
           <title>Cross Widget Dragging

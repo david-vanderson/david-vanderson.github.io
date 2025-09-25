@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2025</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2025-09-24">
+      <span>September 24, 2025</span>
+      <h2><a href="#2025-09-24">Large Document Speed
+</a></h2>
+      <p>We now have fast partial rendering of large text documents in <code>TextLayoutWidget</code> and <code>TextEntryWidget</code>.</p><ul><li>Load the demo</li><li>Go to the “Text Entry” or “Text Layout” sections</li><li>Click the “Large Doc” button at top right</li><li>Scrolling/Selection/Editing are fast independent of the amount of text</li></ul><p>The neat thing is the api for feeding text into these widgets is unchanged (thanks <strong>Teodor Källman</strong>!).</p><p>It works generally the way you might expect:</p><ul><li>textLayout records the height after each newline (at least 200px apart)</li><li>when passed <code>.cache_layout = true</code>, it uses the heights from last frame to only render the visible text</li></ul><p>For textEntry editing, it combines the byte range affected by the edits with the visible text.</p><p>Things that require passing <code>.cache_layout = false</code> for a frame:</p><ul><li>changing the text content outside of textEntry</li><li>changing the font</li><li>changing the font line spacing</li></ul><p>textLayout detects a few situations automatically:</p><ul><li>natural scale of app changes</li><li>break_lines changes</li><li>width changes when break_lines is true</li></ul><p>dvui is starting to be reasonable for file editing!</p><p>If you have any questions or problems, please ask on Discord or file an issue/discussion on Github.  Thanks!</p>
+    </div>
+  
     <div id="2025-09-05">
       <span>September 05, 2025</span>
       <h2><a href="#2025-09-05">Cross Widget Dragging
