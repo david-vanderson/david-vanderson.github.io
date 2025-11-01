@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 02 Oct 2025 19:06:59 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Nov 2025 15:43:57 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>October 2025
+</title>
+          <description>&lt;div id=&quot;2025-11-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2025-11-01&quot;&gt;October 2025&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;5&lt;/strong&gt; people contributed this month with &lt;strong&gt;146&lt;/strong&gt; commits.&lt;/p&gt;&lt;h4&gt;Screen Reader Support&lt;/h4&gt;&lt;p&gt;Huge thanks to &lt;strong&gt;Paul Hatchman&lt;/strong&gt; who implemented OS &lt;strong&gt;screen-reader&lt;/strong&gt; support!&lt;/p&gt;&lt;p&gt;DVUI now integrates with &lt;a href=&quot;https://accesskit.dev/&quot; target=&quot;_blank&quot;&gt;AccessKit&lt;/a&gt; via their &lt;a href=&quot;https://github.com/AccessKit/accesskit-c&quot; target=&quot;_blank&quot;&gt;C API&lt;/a&gt; to communicate the dvui widget tree to the OS-specific accessibility apis.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;use &lt;code&gt;-Daccesskit=static&lt;/code&gt; or &lt;code&gt;-Daccesskit=shared&lt;/code&gt; (also &lt;code&gt;-fsys=accesskit&lt;/code&gt;)&lt;/li&gt;&lt;li&gt;supports Windows, Mac, and Linux&lt;/li&gt;&lt;li&gt;can get accessibility input events (like focus or activate)&lt;/li&gt;&lt;li&gt;see &lt;a href=&quot;https://github.com/david-vanderson/dvui/blob/main/readme-accessibility.md&quot; target=&quot;_blank&quot;&gt;readme-accessibility&lt;/a&gt; for details&lt;/li&gt;&lt;li&gt;please file bugs and missing features so we can continue to improve this&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;This is a huge step for accessibility - horay!&lt;/p&gt;&lt;h4&gt;Focus Groups&lt;/h4&gt;&lt;p&gt;As part of the accessibility work, we found that dvui was not handling keyboard navigation correctly for logical groups of widgets (radio groups, tabs, menus, trees, grids).&lt;/p&gt;&lt;p&gt;Now TAB will move focus to the group, arrow keys move focus inside a group, and a second TAB will move past the group.&lt;/p&gt;&lt;p&gt;This is done automatically for tabs/menus/trees/grids, and available as &lt;code&gt;radioGroup&lt;/code&gt; for radio buttons and &lt;code&gt;focusGroup&lt;/code&gt; for arbitrary groups.&lt;/p&gt;&lt;h4&gt;Other Improvements:&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;Backend logging integrated with zig logging (&lt;strong&gt;Teodor Källman&lt;/strong&gt;)&lt;/li&gt;&lt;li&gt;TextLayoutWidget handles invalid utf8 when &lt;code&gt;.cache_layout&lt;/code&gt; (&lt;strong&gt;Teodor Källman&lt;/strong&gt;)&lt;/li&gt;&lt;li&gt;LabelWidget - will ellipsize when not enough room&lt;/li&gt;&lt;li&gt;Debug - new “Frame Times” graph can help understand if jitter is coming from between Window.begin/end&lt;/li&gt;&lt;li&gt;new &lt;code&gt;link()&lt;/code&gt; that renders URLs and handles clicks (also TextLayoutWidget.addLink)&lt;/li&gt;&lt;li&gt;Theme.max_default_corner_radius - easier to have themes with sharper corners&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2025-11-01</link>
+          <pubDate>Sat, 01 Nov 2025 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2025-11-01</guid>
+        </item>
       
         <item>
           <title>Septemer 2025
