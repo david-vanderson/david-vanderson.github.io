@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 01 Jan 2026 19:43:20 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 03 Feb 2026 17:08:02 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>January 2026
+</title>
+          <description>&lt;div id=&quot;2026-02-03&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2026-02-03&quot;&gt;January 2026&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;3&lt;/strong&gt; people contributed this month with &lt;strong&gt;65&lt;/strong&gt; commits.&lt;/p&gt;&lt;h4&gt;Accesskit Text Runs&lt;/h4&gt;&lt;p&gt;Giant thanks to &lt;strong&gt;Paul Hatchman&lt;/strong&gt; for adding text run support to our Accesskit integration!&lt;/p&gt;&lt;p&gt;Screen readers can now navigate normally through textLayout and textEntry content.&lt;/p&gt;&lt;p&gt;This is the last large piece needed for decent screen reader support.  Wohoo!&lt;/p&gt;&lt;p&gt;While we will continue work in this area for bugs and enhancements, this is a huge milestone.&lt;/p&gt;&lt;p&gt;Big thanks to &lt;strong&gt;Arnold Loubriat&lt;/strong&gt; for helping us use Accesskit properly and for loads of testing!&lt;/p&gt;&lt;p&gt;Shout out to &lt;strong&gt;Ethin Probst&lt;/strong&gt; for excellent reporting and testing!&lt;/p&gt;&lt;h4&gt;Retaining Textures and Data&lt;/h4&gt;&lt;p&gt;dvui implements a form of garbage collection for textures and data.  If you don’t reference a texture or call dataGet/Set for a frame, we free that memory.  But sometimes you want to keep things around a bit longer.&lt;/p&gt;&lt;p&gt;Now we provide functions &lt;code&gt;textureRetain&lt;/code&gt;, &lt;code&gt;dataRetain&lt;/code&gt;, and &lt;code&gt;retainClear&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;These give a way to keep dvui from freeing these things, while associating them with a “retain key”.  That key can be passed later to &lt;code&gt;retainClear&lt;/code&gt; to tell dvui to stop retaining them.&lt;/p&gt;&lt;p&gt;This was motivated by the demo’s stuttering when reshowing the demo buttons (which trigger regenerating a bunch of textures).  It’s now fixed by:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;retaining the generated textures and associated data&lt;/li&gt;&lt;li&gt;the retain key is the demo window id&lt;/li&gt;&lt;li&gt;the demo window has a placeholder data with &lt;code&gt;dataSetDeinitFunction&lt;/code&gt; which calls &lt;code&gt;retainClear&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;So the flow is:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;while the demo window is shown, we retain the textures/data&lt;/li&gt;&lt;li&gt;when the demo window is closed, we free the placeholder data&lt;/li&gt;&lt;li&gt;the deinit function calls retainClear&lt;/li&gt;&lt;li&gt;the textures/data are freed&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;These features all come together to allow retaining data to match the lifetime of some higher level widget.&lt;/p&gt;&lt;h4&gt;More Improvements:&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;floatingWindow: add &lt;code&gt;autoPosition()&lt;/code&gt; to center (after a resize)&lt;/li&gt;&lt;li&gt;floatingWindow: option to disable resizing&lt;/li&gt;&lt;li&gt;web backend: changes to enable more javascript customization&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2026-02-03</link>
+          <pubDate>Tue, 03 Feb 2026 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2026-02-03</guid>
+        </item>
       
         <item>
           <title>December 2025

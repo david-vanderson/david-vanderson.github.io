@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2026</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2026-02-03">
+      <span>February 03, 2026</span>
+      <h2><a href="#2026-02-03">January 2026
+</a></h2>
+      <p><strong>3</strong> people contributed this month with <strong>65</strong> commits.</p><h4>Accesskit Text Runs</h4><p>Giant thanks to <strong>Paul Hatchman</strong> for adding text run support to our Accesskit integration!</p><p>Screen readers can now navigate normally through textLayout and textEntry content.</p><p>This is the last large piece needed for decent screen reader support.  Wohoo!</p><p>While we will continue work in this area for bugs and enhancements, this is a huge milestone.</p><p>Big thanks to <strong>Arnold Loubriat</strong> for helping us use Accesskit properly and for loads of testing!</p><p>Shout out to <strong>Ethin Probst</strong> for excellent reporting and testing!</p><h4>Retaining Textures and Data</h4><p>dvui implements a form of garbage collection for textures and data.  If you don’t reference a texture or call dataGet/Set for a frame, we free that memory.  But sometimes you want to keep things around a bit longer.</p><p>Now we provide functions <code>textureRetain</code>, <code>dataRetain</code>, and <code>retainClear</code>.</p><p>These give a way to keep dvui from freeing these things, while associating them with a “retain key”.  That key can be passed later to <code>retainClear</code> to tell dvui to stop retaining them.</p><p>This was motivated by the demo’s stuttering when reshowing the demo buttons (which trigger regenerating a bunch of textures).  It’s now fixed by:</p><ul><li>retaining the generated textures and associated data</li><li>the retain key is the demo window id</li><li>the demo window has a placeholder data with <code>dataSetDeinitFunction</code> which calls <code>retainClear</code></li></ul><p>So the flow is:</p><ul><li>while the demo window is shown, we retain the textures/data</li><li>when the demo window is closed, we free the placeholder data</li><li>the deinit function calls retainClear</li><li>the textures/data are freed</li></ul><p>These features all come together to allow retaining data to match the lifetime of some higher level widget.</p><h4>More Improvements:</h4><ul><li>floatingWindow: add <code>autoPosition()</code> to center (after a resize)</li><li>floatingWindow: option to disable resizing</li><li>web backend: changes to enable more javascript customization</li></ul>
+    </div>
+  
     <div id="2026-01-01">
       <span>January 01, 2026</span>
       <h2><a href="#2026-01-01">December 2025
