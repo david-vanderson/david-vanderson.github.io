@@ -852,6 +852,19 @@ export class Dvui {
                 }
                 return 0;
             },
+            wasm_prefers_reduced_motion: () => {
+                if (
+                    window.matchMedia("(prefers-reduced-motion: no-preference)").matches
+                ) {
+                    return 0;
+                }
+                if (
+                    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                ) {
+                    return 1;
+                }
+                return 0;
+            },
             wasm_download_data: (
                 name_ptr,
                 name_len,
@@ -1209,7 +1222,7 @@ export class Dvui {
             this.requestRender();
         } else if (millis_to_wait > 0) {
             this.renderTimeoutId = setTimeout(
-                function () {
+                function() {
                     this.renderTimeoutId = 0;
                     this.requestRender();
                 }.bind(this),
@@ -1298,11 +1311,11 @@ export class Dvui {
                     if (this.scroll_lowest_batch[0] === 4.000244140625) {
                         ticks *= touchpad_adj; // mac safari/chrome scale wheel like touchpad
                     }
-                    console.log("wheelX -deltaX " + -ev.deltaX + " ticks " + ticks);
+                    //console.log("wheelX -deltaX " + -ev.deltaX + " ticks " + ticks);
                 } else {
                     // assume touchpad
                     ticks = ticks / this.scroll_lowest[0] * touchpad_adj;
-                    console.log("touchpadX -deltaX " + -ev.deltaX + " ticks " + ticks);
+                    //console.log("touchpadX -deltaX " + -ev.deltaX + " ticks " + ticks);
                 }
                 this.instance.exports.add_event(
                     4,
@@ -1331,11 +1344,11 @@ export class Dvui {
                     if (this.scroll_lowest_batch[1] === 4.000244140625) {
                         ticks *= touchpad_adj; // mac safari/chrome scale wheel like touchpad
                     }
-                    console.log("wheelY -deltaY " + -ev.deltaY + " ticks " + ticks);
+                    //console.log("wheelY -deltaY " + -ev.deltaY + " ticks " + ticks);
                 } else {
                     // assume touchpad
                     ticks = ticks / this.scroll_lowest[1] * touchpad_adj;
-                    console.log("touchpadY -deltaY " + -ev.deltaY + " ticks " + ticks);
+                    //console.log("touchpadY -deltaY " + -ev.deltaY + " ticks " + ticks);
                 }
                 this.instance.exports.add_event(
                     4,
