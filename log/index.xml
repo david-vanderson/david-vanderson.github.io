@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 03 Apr 2026 22:10:13 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2026 18:40:26 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>April 2026
+</title>
+          <description>&lt;div id=&quot;2026-05-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2026-05-01&quot;&gt;April 2026&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;14&lt;/strong&gt; people contributed this month with &lt;strong&gt;107&lt;/strong&gt; commits.&lt;/p&gt;&lt;h3&gt;Zig 0.16&lt;/h3&gt;&lt;p&gt;dvui main branch is now using zig 0.16.0.  No huge changes, but I’m quite excited about things we might be able to do in the future leveraging the &lt;code&gt;std.Io&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;There is a new &lt;code&gt;dvui.io&lt;/code&gt; global var that needs to be set (usually by the backend) before creating a &lt;code&gt;dvui.Window&lt;/code&gt;.&lt;/p&gt;&lt;h3&gt;Android Example&lt;/h3&gt;&lt;p&gt;Big thanks to &lt;strong&gt;Shehab Ellithy&lt;/strong&gt; for contributing an example for how to compile dvui for android devices.  See &lt;code&gt;examples/android-example/README.md&lt;/code&gt;.&lt;/p&gt;&lt;h3&gt;OpenGL Renderer&lt;/h3&gt;&lt;p&gt;Huge thanks to &lt;strong&gt;Elaine Gibson&lt;/strong&gt; for consolidating the opengl code from the wio and glfw backends.  This is the beginning of separating dvui backends from rendering code.&lt;/p&gt;&lt;p&gt;It improves our rendering code and makes writing new backends easier.  Thank you!&lt;/p&gt;&lt;h3&gt;Scroll Speed #2&lt;/h3&gt;&lt;p&gt;We did a second round of scrolling speed improvements.  Mouse wheel scrolling got faster across the board.&lt;/p&gt;&lt;p&gt;On web in particular we now have a heuristic that tries to detect a mouse wheel from a touchpad and scale them separately.&lt;/p&gt;&lt;p&gt;See &lt;a href=&quot;https://github.com/david-vanderson/dvui/pull/805&quot; target=&quot;_blank&quot;&gt;https://github.com/david-vanderson/dvui/pull/805&lt;/a&gt; for details.&lt;/p&gt;&lt;p&gt;Please report platforms/situations where scrolling feels wrong!&lt;/p&gt;&lt;h3&gt;Smoothly Zooming Text&lt;/h3&gt;&lt;p&gt;Normally you want glyphs to be aligned to the pixel grid.  But if you are smoothly zooming (not in fixed increments) this causes visual jitter.&lt;/p&gt;&lt;p&gt;Now if you:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;use stb_truetype (&lt;code&gt;-Dfreetype=false&lt;/code&gt;)&lt;/li&gt;&lt;li&gt;turn off snapToPixels when rendering the text&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;the glyphs will no longer be aligned to the pixel grid.  This removes the visual jitter.  The cost is blurrier text.&lt;/p&gt;&lt;h3&gt;More Improvements:&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;tooltip: new &lt;code&gt;.scale&lt;/code&gt; option for when you don’t want the tooltip to scale with content&lt;/li&gt;&lt;li&gt;reduce_motion: new &lt;code&gt;dvui.reduce_motion&lt;/code&gt; bool that makes animations finish instantly&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2026-05-01</link>
+          <pubDate>Fri, 01 May 2026 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2026-05-01</guid>
+        </item>
       
         <item>
           <title>March 2026

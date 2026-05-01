@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2026</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2026-05-01">
+      <span>May 01, 2026</span>
+      <h2><a href="#2026-05-01">April 2026
+</a></h2>
+      <p><strong>14</strong> people contributed this month with <strong>107</strong> commits.</p><h3>Zig 0.16</h3><p>dvui main branch is now using zig 0.16.0.  No huge changes, but I’m quite excited about things we might be able to do in the future leveraging the <code>std.Io</code>.</p><p>There is a new <code>dvui.io</code> global var that needs to be set (usually by the backend) before creating a <code>dvui.Window</code>.</p><h3>Android Example</h3><p>Big thanks to <strong>Shehab Ellithy</strong> for contributing an example for how to compile dvui for android devices.  See <code>examples/android-example/README.md</code>.</p><h3>OpenGL Renderer</h3><p>Huge thanks to <strong>Elaine Gibson</strong> for consolidating the opengl code from the wio and glfw backends.  This is the beginning of separating dvui backends from rendering code.</p><p>It improves our rendering code and makes writing new backends easier.  Thank you!</p><h3>Scroll Speed #2</h3><p>We did a second round of scrolling speed improvements.  Mouse wheel scrolling got faster across the board.</p><p>On web in particular we now have a heuristic that tries to detect a mouse wheel from a touchpad and scale them separately.</p><p>See <a href="https://github.com/david-vanderson/dvui/pull/805" target="_blank">https://github.com/david-vanderson/dvui/pull/805</a> for details.</p><p>Please report platforms/situations where scrolling feels wrong!</p><h3>Smoothly Zooming Text</h3><p>Normally you want glyphs to be aligned to the pixel grid.  But if you are smoothly zooming (not in fixed increments) this causes visual jitter.</p><p>Now if you:</p><ul><li>use stb_truetype (<code>-Dfreetype=false</code>)</li><li>turn off snapToPixels when rendering the text</li></ul><p>the glyphs will no longer be aligned to the pixel grid.  This removes the visual jitter.  The cost is blurrier text.</p><h3>More Improvements:</h3><ul><li>tooltip: new <code>.scale</code> option for when you don’t want the tooltip to scale with content</li><li>reduce_motion: new <code>dvui.reduce_motion</code> bool that makes animations finish instantly</li></ul><p>Thank you to everyone who asked questions, filed issues, and contributed!</p>
+    </div>
+  
     <div id="2026-04-03">
       <span>April 03, 2026</span>
       <h2><a href="#2026-04-03">March 2026
