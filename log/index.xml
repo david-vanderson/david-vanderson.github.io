@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 01 May 2026 18:40:26 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jun 2026 01:26:45 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>May 2026
+</title>
+          <description>&lt;div id=&quot;2026-06-01&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2026-06-01&quot;&gt;May 2026&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;10&lt;/strong&gt; people contributed this month with &lt;strong&gt;142&lt;/strong&gt; commits.&lt;/p&gt;&lt;h3&gt;Time Tracking&lt;/h3&gt;&lt;p&gt;&lt;code&gt;secondsSinceLastFrame&lt;/code&gt; now reports a reasonable default value (10ms) if the underlying clock goes backwards.&lt;/p&gt;&lt;p&gt;dvui tries hard to compensate for a clock jumping backwards.  &lt;code&gt;frameTimeNS&lt;/code&gt; will not go backward, which makes it decent to use for performance numbers.&lt;/p&gt;&lt;p&gt;For general UI timing stuff (like tracking how long a key has been pressed), &lt;code&gt;secondsSinceLastFrame&lt;/code&gt; is good because it will always report a value greater than 0 and less than ~71.5 minutes (2^32 micros).  If the clock jumps back, it will report 10ms.&lt;/p&gt;&lt;p&gt;That means your UI (including dvui animations) will continue to work reasonably well even if the clock goes wrong.&lt;/p&gt;&lt;h3&gt;Texture UV Rect and Wrapping&lt;/h3&gt;&lt;p&gt;Textures gained options for whether to clamp or repeat uv values.&lt;/p&gt;&lt;p&gt;&lt;code&gt;renderTexture&lt;/code&gt; got a &lt;code&gt;.uv_rect&lt;/code&gt; option that specifies a screen rectangle that logically covers the &lt;code&gt;.uv&lt;/code&gt; coords given. This can make showing part of a larger texture more intuitive.&lt;/p&gt;&lt;h3&gt;Mouse Type&lt;/h3&gt;&lt;p&gt;Building on last month’s scrolling heuristic, you can now use &lt;code&gt;dvui.mouseType&lt;/code&gt; to see which kind of mouse (touchpad vs. wheel mouse) dvui thinks the user is using.&lt;/p&gt;&lt;p&gt;This can be useful in situations where you want a mouse wheel to work differently than two finger touchpad scrolling (like zooming vs. panning).&lt;/p&gt;&lt;p&gt;The heuristic is based on the values dvui sees from mouse wheel events.  Please report problems!&lt;/p&gt;&lt;h3&gt;More Improvements:&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;font: underline and strike (strikethrough) options&lt;/li&gt;&lt;li&gt;textLayout: different font sizes are baseline aligned&lt;/li&gt;&lt;li&gt;raylib: better variable framerate, work around a glfw/wayland problem that causes spurious wakeups&lt;/li&gt;&lt;li&gt;time: if time goes backwards, &lt;code&gt;secondsSinceLastFrame&lt;/code&gt; now reports 10ms per frame, ensuring animations proceed reasonably&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2026-06-01</link>
+          <pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2026-06-01</guid>
+        </item>
       
         <item>
           <title>April 2026

@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2026</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2026-06-01">
+      <span>June 01, 2026</span>
+      <h2><a href="#2026-06-01">May 2026
+</a></h2>
+      <p><strong>10</strong> people contributed this month with <strong>142</strong> commits.</p><h3>Time Tracking</h3><p><code>secondsSinceLastFrame</code> now reports a reasonable default value (10ms) if the underlying clock goes backwards.</p><p>dvui tries hard to compensate for a clock jumping backwards.  <code>frameTimeNS</code> will not go backward, which makes it decent to use for performance numbers.</p><p>For general UI timing stuff (like tracking how long a key has been pressed), <code>secondsSinceLastFrame</code> is good because it will always report a value greater than 0 and less than ~71.5 minutes (2^32 micros).  If the clock jumps back, it will report 10ms.</p><p>That means your UI (including dvui animations) will continue to work reasonably well even if the clock goes wrong.</p><h3>Texture UV Rect and Wrapping</h3><p>Textures gained options for whether to clamp or repeat uv values.</p><p><code>renderTexture</code> got a <code>.uv_rect</code> option that specifies a screen rectangle that logically covers the <code>.uv</code> coords given. This can make showing part of a larger texture more intuitive.</p><h3>Mouse Type</h3><p>Building on last month’s scrolling heuristic, you can now use <code>dvui.mouseType</code> to see which kind of mouse (touchpad vs. wheel mouse) dvui thinks the user is using.</p><p>This can be useful in situations where you want a mouse wheel to work differently than two finger touchpad scrolling (like zooming vs. panning).</p><p>The heuristic is based on the values dvui sees from mouse wheel events.  Please report problems!</p><h3>More Improvements:</h3><ul><li>font: underline and strike (strikethrough) options</li><li>textLayout: different font sizes are baseline aligned</li><li>raylib: better variable framerate, work around a glfw/wayland problem that causes spurious wakeups</li><li>time: if time goes backwards, <code>secondsSinceLastFrame</code> now reports 10ms per frame, ensuring animations proceed reasonably</li></ul><p>Thank you to everyone who asked questions, filed issues, and contributed!</p>
+    </div>
+  
     <div id="2026-05-01">
       <span>May 01, 2026</span>
       <h2><a href="#2026-05-01">April 2026
