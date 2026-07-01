@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DVUI Documentation</title>
     <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDEyLjcgMTIuNyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtOTAuMzA4IC0xMzcuNTkpIj48cmVjdCB4PSI5MS4wNDkiIHk9IjEzOS4zNCIgd2lkdGg9IjExLjIxNyIgaGVpZ2h0PSI5LjIwMjgiIHJ5PSIxLjY0NTciIGZpbGw9IiM0MDQwNDAiIHN0cm9rZT0iIzI5NzhlMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW9wYWNpdHk9Ii44OTgwNCIgc3Ryb2tlLXdpZHRoPSIxLjQzNTgiIHN0eWxlPSJwYWludC1vcmRlcjpub3JtYWwiLz48cGF0aCBkPSJtOTMuMjIgMTQyLjYydjIuNjQxNmgwLjQwMDE2cTAuNjg0MzIgMCAxLjA0MzktMC4zMzkyOCAwLjM2MjQ2LTAuMzM5MjYgMC4zNjI0Ni0wLjk4NTg5IDAtMC42NDM3My0wLjM1OTU2LTAuOTgwMDl0LTEuMDQ2OC0wLjMzNjM2em0tMS4xMTY0LTAuODQzOGgxLjE3NzNxMC45ODU4OSAwIDEuNDY3MiAwLjE0MjA3IDAuNDg0MjQgMC4xMzkxOSAwLjgyOTMxIDAuNDc1NTUgMC4zMDQ0NyAwLjI5Mjg3IDAuNDUyMzUgMC42NzU2MyAwLjE0Nzg5IDAuMzgyNzYgMC4xNDc4OSAwLjg2NyAwIDAuNDkwMDYtMC4xNDc4OSAwLjg3NTcxLTAuMTQ3ODggMC4zODI3Ni0wLjQ1MjM1IDAuNjc1NjItMC4zNDc5NiAwLjMzNjM3LTAuODM1MTEgMC40Nzg0NS0wLjQ4NzE1IDAuMTM5MTktMS40NjE0IDAuMTM5MTloLTEuMTc3M3ptNC41NzA0IDBoMS4xMjIybDEuMTQ4MyAzLjE5NTQgMS4xNDU0LTMuMTk1NGgxLjEyMjJsLTEuNjAzNSA0LjMyOTJoLTEuMzMxeiIgZmlsbD0iI2YyZjJmMiIgc3Ryb2tlLXdpZHRoPSIuMTAxODIiIHN0eWxlPSJzaGFwZS1wYWRkaW5nOjEuNTg3ODt3aGl0ZS1zcGFjZTpwcmUiIGFyaWEtbGFiZWw9IkRWIi8+PC9nPjwvc3ZnPgo=">
+    <link rel="preload" as="fetch" type="application/wasm" crossorigin href="main.wasm">
+    <link rel="preload" as="fetch" type="application/x-tar" crossorigin href="sources.tar">
     <style type="text/css">
       *, *::before, *::after {
         box-sizing: border-box;
@@ -30,7 +32,6 @@
         padding: 1em;
         margin: 0;
         overflow-x: auto;
-        border-radius:.4em;
       }
       :not(pre) > code {
         white-space: break-spaces;
@@ -41,6 +42,15 @@
       }
       code a {
         color: #000000;
+      }
+      .source-code {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: start;
+      }
+      .source-line-numbers pre {
+        text-align: right;
+        color: #666;
       }
       #listFields > div, #listParams > div {
         margin-bottom: 1em;
@@ -400,7 +410,14 @@
     </div>
     <div id="sectSource" class="hidden">
       <h2>Source Code</h2>
-      <pre><code id="sourceText"></code></pre>
+      <div class="source-code">
+        <div class="source-line-numbers">
+          <pre><code id="sourceLineNumbers"></code></pre>
+        </div>
+        <div class="source-text">
+          <pre><code id="sourceText"></code></pre>
+        </div>
+      </div>
     </div>
     </section>
     <div id="helpDialog" class="hidden">
