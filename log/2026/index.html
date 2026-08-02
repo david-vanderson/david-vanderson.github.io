@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2026</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2026-08-02">
+      <span>August 02, 2026</span>
+      <h2><a href="#2026-08-02">July 2026
+</a></h2>
+      <p><strong>7</strong> people contributed this month with <strong>98</strong> commits.</p><h3>Docking</h3><p>Big thanks to <strong>Bruno Massa</strong> who contributed a docking solution!</p><p><code>dvui.dockspace</code> is the entry point.  Check it out in the new demo “Docking” section.</p><h3>Grid Improvements</h3><p>GridWidget was enhanced to better support two usecases.</p><p>First is spreadsheet-like interaction, where you can move the “selected” cell around.  <code>cell.editable</code> gives a cell that becomes editable on enter or other key press.</p><p>Second is purely for widget layout.  The <code>.layout_only</code> init option now turns off all interactions.</p><h3>Devtools</h3><p>Huge thank you to <strong>Bruno Massa</strong> for contributing a bunch of devtools:</p><ul><li>Window.renderStats: performance stats for last completed frame</li><li>debug.capture*: compare widget trees captured from frames</li><li>debug.dump*: output widget trees in json for external tools</li></ul><p>You can checkout the initial UI with <code>zig build devtools</code> which currently uses the sdl3gpu backend.</p><h3>Bundled Web Server for Demo</h3><p>Big thanks to <strong>Lue</strong> for contributing a dedicated web server for development (not production).  This helps people who can’t or don’t want to run a separate local server during devlopment.</p><p><code>zig build serve-web-app</code> - check it out!</p><h3>Native Tesselator</h3><p>Giant thank you to <strong>nat3</strong> for contributing a zig native polygon tesselator!</p><p>This is a direct port of mapbox’s earcut, and is now used for svg and tvg icon rendering.  Instead of caching a rasterized version, we now cache the triangles directly.</p><p>They also contributed <code>addQuadBezier</code> and <code>addCubicBezier</code> to <code>Path.Builder</code>.</p><p>This means we finally have a <code>Path.fill</code> function that works on arbitrary paths!</p><h3>More Improvements:</h3><ul><li>hoverFade: fading in/out hover highlights (<strong>Sawyer X</strong> - thank you!)</li><li>textLayout: helpers for tree sitter highlighting separated from textEntry</li></ul><p>Thank you to everyone who asked questions, filed issues, and contributed!</p>
+    </div>
+  
     <div id="2026-07-01">
       <span>July 01, 2026</span>
       <h2><a href="#2026-07-01">June 2026

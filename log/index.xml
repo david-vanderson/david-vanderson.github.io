@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 01 Jul 2026 16:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2026 16:51:02 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>July 2026
+</title>
+          <description>&lt;div id=&quot;2026-08-02&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2026-08-02&quot;&gt;July 2026&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;7&lt;/strong&gt; people contributed this month with &lt;strong&gt;98&lt;/strong&gt; commits.&lt;/p&gt;&lt;h3&gt;Docking&lt;/h3&gt;&lt;p&gt;Big thanks to &lt;strong&gt;Bruno Massa&lt;/strong&gt; who contributed a docking solution!&lt;/p&gt;&lt;p&gt;&lt;code&gt;dvui.dockspace&lt;/code&gt; is the entry point.  Check it out in the new demo “Docking” section.&lt;/p&gt;&lt;h3&gt;Grid Improvements&lt;/h3&gt;&lt;p&gt;GridWidget was enhanced to better support two usecases.&lt;/p&gt;&lt;p&gt;First is spreadsheet-like interaction, where you can move the “selected” cell around.  &lt;code&gt;cell.editable&lt;/code&gt; gives a cell that becomes editable on enter or other key press.&lt;/p&gt;&lt;p&gt;Second is purely for widget layout.  The &lt;code&gt;.layout_only&lt;/code&gt; init option now turns off all interactions.&lt;/p&gt;&lt;h3&gt;Devtools&lt;/h3&gt;&lt;p&gt;Huge thank you to &lt;strong&gt;Bruno Massa&lt;/strong&gt; for contributing a bunch of devtools:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Window.renderStats: performance stats for last completed frame&lt;/li&gt;&lt;li&gt;debug.capture*: compare widget trees captured from frames&lt;/li&gt;&lt;li&gt;debug.dump*: output widget trees in json for external tools&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;You can checkout the initial UI with &lt;code&gt;zig build devtools&lt;/code&gt; which currently uses the sdl3gpu backend.&lt;/p&gt;&lt;h3&gt;Bundled Web Server for Demo&lt;/h3&gt;&lt;p&gt;Big thanks to &lt;strong&gt;Lue&lt;/strong&gt; for contributing a dedicated web server for development (not production).  This helps people who can’t or don’t want to run a separate local server during devlopment.&lt;/p&gt;&lt;p&gt;&lt;code&gt;zig build serve-web-app&lt;/code&gt; - check it out!&lt;/p&gt;&lt;h3&gt;Native Tesselator&lt;/h3&gt;&lt;p&gt;Giant thank you to &lt;strong&gt;nat3&lt;/strong&gt; for contributing a zig native polygon tesselator!&lt;/p&gt;&lt;p&gt;This is a direct port of mapbox’s earcut, and is now used for svg and tvg icon rendering.  Instead of caching a rasterized version, we now cache the triangles directly.&lt;/p&gt;&lt;p&gt;They also contributed &lt;code&gt;addQuadBezier&lt;/code&gt; and &lt;code&gt;addCubicBezier&lt;/code&gt; to &lt;code&gt;Path.Builder&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;This means we finally have a &lt;code&gt;Path.fill&lt;/code&gt; function that works on arbitrary paths!&lt;/p&gt;&lt;h3&gt;More Improvements:&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;hoverFade: fading in/out hover highlights (&lt;strong&gt;Sawyer X&lt;/strong&gt; - thank you!)&lt;/li&gt;&lt;li&gt;textLayout: helpers for tree sitter highlighting separated from textEntry&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2026-08-02</link>
+          <pubDate>Sun, 02 Aug 2026 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2026-08-02</guid>
+        </item>
       
         <item>
           <title>June 2026
