@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 01 Oct 2026 17:44:21 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 19:32:32 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>Layout: Expand but Don’t Scroll
+</title>
+          <description>&lt;div id=&quot;2026-10-20&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2026-10-20&quot;&gt;Layout: Expand but Don’t Scroll&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A layout situation:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;floatingWindow with scrollArea&lt;/li&gt;&lt;li&gt;few labels/controls at the top&lt;/li&gt;&lt;li&gt;the rest is a grid&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;We want both of these properties:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;grid takes up all remaining space in the floatingWindow&lt;/li&gt;&lt;li&gt;grid does NOT cause floatingWindow scrollArea to scroll&lt;ul&gt;&lt;li&gt;if needed, grid should scroll internally&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Solution:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;grid &lt;code&gt;.expand = .vertical&lt;/code&gt;&lt;ul&gt;&lt;li&gt;take all remaining space&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;grid &lt;code&gt;.max_size_content = .height(100)&lt;/code&gt;&lt;ul&gt;&lt;li&gt;tell scrollArea we only need 100 pixels, so it won’t scroll (unless very tiny)&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;This works because of how &lt;code&gt;.max_size_content&lt;/code&gt; and &lt;code&gt;.expand&lt;/code&gt; interact.  &lt;a href=&quot;https://david-vanderson.github.io/log/2025/#2025-02-23&quot;&gt;min_size_content is not the minimum&lt;/a&gt; and max_size_content is not the maximum.&lt;/p&gt;&lt;p&gt;I’m calling out this specific layout case and solution.  I spent far too much time figuring out what dvui change was needed until realizing we supported it out of the box.&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2026-10-20</link>
+          <pubDate>Tue, 20 Oct 2026 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2026-10-20</guid>
+        </item>
       
         <item>
           <title>September 2026

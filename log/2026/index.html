@@ -61,6 +61,13 @@
   <h1 class="title">DVUI Devlog 2026</h1>
   <div><div id="about"><p><a href="/log/index.xml">RSS Feed</a></p><p><a href="/log/">Archive</a></p></div></div>
   <div class="feed">
+    <div id="2026-10-20">
+      <span>October 20, 2026</span>
+      <h2><a href="#2026-10-20">Layout: Expand but Don’t Scroll
+</a></h2>
+      <p>A layout situation:</p><ul><li>floatingWindow with scrollArea</li><li>few labels/controls at the top</li><li>the rest is a grid</li></ul><p>We want both of these properties:</p><ul><li>grid takes up all remaining space in the floatingWindow</li><li>grid does NOT cause floatingWindow scrollArea to scroll<ul><li>if needed, grid should scroll internally</li></ul></li></ul><p>Solution:</p><ul><li>grid <code>.expand = .vertical</code><ul><li>take all remaining space</li></ul></li><li>grid <code>.max_size_content = .height(100)</code><ul><li>tell scrollArea we only need 100 pixels, so it won’t scroll (unless very tiny)</li></ul></li></ul><p>This works because of how <code>.max_size_content</code> and <code>.expand</code> interact.  <a href="/log/2025/#2025-02-23">min_size_content is not the minimum</a> and max_size_content is not the maximum.</p><p>I’m calling out this specific layout case and solution.  I spent far too much time figuring out what dvui change was needed until realizing we supported it out of the box.</p>
+    </div>
+  
     <div id="2026-10-01">
       <span>October 01, 2026</span>
       <h2><a href="#2026-10-01">September 2026
