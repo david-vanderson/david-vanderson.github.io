@@ -5,8 +5,17 @@
     <description>DVUI - Devlog</description>
     <generator>Zine -- https://zine-ssg.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 20 Oct 2026 19:32:32 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Nov 2026 18:29:59 +0000</lastBuildDate>
     
+      
+        <item>
+          <title>October 2026
+</title>
+          <description>&lt;div id=&quot;2026-11-02&quot;&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#2026-11-02&quot;&gt;October 2026&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;10&lt;/strong&gt; people contributed this month with &lt;strong&gt;125&lt;/strong&gt; commits.&lt;/p&gt;&lt;h3&gt;Zig 0.17&lt;/h3&gt;&lt;p&gt;Thank you to everyone helping us upgrade to Zig 0.17.  Big thanks especially to &lt;strong&gt;Aurélien Cibrario&lt;/strong&gt; and &lt;strong&gt;Julian Dax&lt;/strong&gt; for maintaining a branch for quite some time, which made it super easy to merge after the release.&lt;/p&gt;&lt;p&gt;If you are on x86_64-linux, checkout &lt;code&gt;-fincremental --watch&lt;/code&gt; for near-instant recompiles!  I’m really enjoying it for UI tweaking.&lt;/p&gt;&lt;h3&gt;Multitouch&lt;/h3&gt;&lt;p&gt;Huge thanks to &lt;strong&gt;nat3&lt;/strong&gt; for splitting mouse capture and getting us going on multitouch support:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;mouse capture is now per pointer (mouse is one, each touch finger is another)&lt;/li&gt;&lt;li&gt;drags are now per pointer&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;This allows interactions like:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;scrolling with one finger while clicking a button with another&lt;/li&gt;&lt;li&gt;simultaneous dragging of two different widgets (see scroll canvas demo)&lt;/li&gt;&lt;li&gt;simultaneous drawing (see demo &gt; applets &gt; drawing)&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Pinch&lt;/h3&gt;&lt;p&gt;We have the start of pinch gesture support (currently sdl3 and web).  This is a separate event (under mouse events) because some platforms recognize and report gestures at the hardware level.&lt;/p&gt;&lt;p&gt;sdl3 reports it as a separate event, while the web backend synthesizes pinch events so dvui code sees a uniform event stream and client code doesn’t have to recognize pinch gestures manually.&lt;/p&gt;&lt;h3&gt;More Improvements:&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;sdl3: rotation support (Thanks &lt;strong&gt;Matthias Scheler&lt;/strong&gt; and &lt;strong&gt;Jan Beelte&lt;/strong&gt;)&lt;/li&gt;&lt;li&gt;raylib: handle keyboard layouts (Thanks &lt;strong&gt;kukuen&lt;/strong&gt;)&lt;/li&gt;&lt;li&gt;testing: snapshot updates and improvements (Thanks &lt;strong&gt;Michael Belousov&lt;/strong&gt;)&lt;/li&gt;&lt;li&gt;sdl2: textureUpdate and textureUpdateSubRect support (Thanks &lt;strong&gt;nat3&lt;/strong&gt;)&lt;/li&gt;&lt;li&gt;realTime(): function to get wall-clock time&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Thank you to everyone who asked questions, filed issues, and contributed!&lt;/p&gt;&lt;/div&gt;</description>
+          <link>https://david-vanderson.github.io/log/#2026-11-02</link>
+          <pubDate>Mon, 02 Nov 2026 00:00:00 +0000</pubDate>
+          <guid>https://david-vanderson.github.io/log/#2026-11-02</guid>
+        </item>
       
         <item>
           <title>Layout: Expand but Don’t Scroll
