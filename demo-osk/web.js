@@ -1065,6 +1065,19 @@ export class Dvui {
                 if (!cached) return 0;
                 return cached.files.length;
             },
+            // Paste after touch input (touch popup menu): read the clipboard
+            // and deliver it as text input. A keyboard paste is delivered by
+            // the browser's own paste through the hidden_input.
+            wasm_clipboardPasteRequest: () => {
+                if (!navigator.clipboard || !navigator.clipboard.readText) return;
+                navigator.clipboard.readText().then((text) => {
+                    if (this.stopped || !text) return;
+                    const str = utf8encoder.encode(text);
+                    const ptr = this.allocBuffer(this.instance.exports.arena_u8, str);
+                    this.instance.exports.add_event(7, ptr, str.length, 0, 0);
+                    this.requestRender();
+                }).catch(() => {});
+            },
             wasm_clipboardTextSet: (ptr, len) => {
                 if (len == 0) {
                     return;
