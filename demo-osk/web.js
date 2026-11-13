@@ -167,11 +167,12 @@ export class Dvui {
         };
     }} */
     programInfo;
-    /** @type {Map<number, [WebGLTexture, number, number]>} */
+    /** @type {Map<number, [WebGLTexture, number, number, number]>} */
+    // texture, width, height, interp
     textures = new Map();
     newTextureId = 1;
 
-    /** @returns {[WebGLTexture, number, number] | null} */
+    /** @returns {[WebGLTexture, number, number, number] | null} */
     textureEntry(id) {
         if (id === 0) return null;
         return this.textures.get(id) ?? null;
@@ -196,7 +197,7 @@ export class Dvui {
     hidden_input;
     /**
      * list of tuple (touch identifier, initial index)
-     * @type {[number, number][]} */
+     * @type {number[]} */
     touches = [];
     /** The lowest deltaX/Y seen, used to determine the delta for touchpads
      *
@@ -222,6 +223,8 @@ export class Dvui {
     /** @type {Map<Id, FileList>} */
     filesCache = new Map();
 
+    fetchCache = new Map();
+
     //let par = document.createElement("p");
     //document.body.prepend(par);
 
@@ -233,9 +236,14 @@ export class Dvui {
     // * on desktop it's needed for us to get text events (not just char down/up)
     // * on touch it's needed to show the on screen keyboard
     oskCheck() {
+        // OSK: these activeElement checks, combined with unconditional
+        // hidden_input focus in touchstart (see "OSK" below) somehow overcome
+        // the iOS 26.4.2 webkit bug and allow the keyboard to appear
         if (this.textInputRect.length == 0) {
-            this.gl.canvas.focus();
-        } else {
+            if (document.activeElement !== this.gl.canvas) {
+                this.gl.canvas.focus();
+            }
+        } else if (document.activeElement !== this.hidden_input) {
             const rect = this.gl.canvas.getBoundingClientRect();
             const left = window.scrollX + rect.left + this.textInputRect[0];
             const top = window.scrollY + rect.top + this.textInputRect[1];
@@ -250,7 +258,7 @@ export class Dvui {
             const height = Math.max(
                 0,
                 Math.min(
-                    this.textInputRect[2],
+                    this.textInputRect[3],
                     this.gl.canvas.clientHeight - top,
                 ),
             );
@@ -264,10 +272,15 @@ export class Dvui {
     }
 
     touchIndex(pointerId) {
-        let idx = this.touches.findIndex((e) => e[0] === pointerId);
+        let idx = this.touches.findIndex((e) => e === pointerId);
+        if (idx < 0) {
+            idx = this.touches.findIndex((e) => e === null);
+            this.touches[idx] = pointerId;
+        }
+
         if (idx < 0) {
             idx = this.touches.length;
-            this.touches.push([pointerId, idx]);
+            this.touches.push(pointerId);
         }
 
         return idx;
@@ -367,6 +380,12 @@ export class Dvui {
         document.body.prepend(this.hidden_input);
 
         this.imports = {
+            wasm_url: () => {
+                return this.allocStringZ(this.instance.exports.arena_u8, window.location.href);
+            },
+            wasm_title: (ptr, len) => {
+                document.title = this.stringFromPointer(ptr, len);
+            },
             wasm_about_webgl2: () => {
                 if (this.webgl2) {
                     return 1;
@@ -406,6 +425,9 @@ export class Dvui {
             wasm_now: () => {
                 return performance.now();
             },
+            wasm_date: () => {
+                return Date.now();
+            },
             wasm_sleep: (ms) => {
                 const end = Date.now() + ms;
                 while (Date.now() < end) {
@@ -441,7 +463,7 @@ export class Dvui {
                 const id = this.newTextureId;
                 //console.log("creating texture " + id);
                 this.newTextureId += 1;
-                this.textures.set(id, [texture, width, height]);
+                this.textures.set(id, [texture, width, height, interp]);
 
                 this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
 
@@ -457,10 +479,6 @@ export class Dvui {
                     pixelData,
                 );
 
-                if (this.webgl2) {
-                    this.gl.generateMipmap(this.gl.TEXTURE_2D);
-                }
-
                 if (interp == 0) {
                     this.gl.texParameteri(
                         this.gl.TEXTURE_2D,
@@ -473,10 +491,16 @@ export class Dvui {
                         this.gl.NEAREST,
                     );
                 } else {
+                    // mipmaps currently break BlurBackdrop
+                    //if (this.webgl2) {
+                    //    this.gl.generateMipmap(this.gl.TEXTURE_2D);
+                    //}
+
                     this.gl.texParameteri(
                         this.gl.TEXTURE_2D,
                         this.gl.TEXTURE_MIN_FILTER,
                         this.gl.LINEAR,
+                        //this.gl.LINEAR_MIPMAP_LINEAR,
                     );
                     this.gl.texParameteri(
                         this.gl.TEXTURE_2D,
@@ -499,12 +523,83 @@ export class Dvui {
 
                 return id;
             },
+            // Replace every pixel of a texture made by wasm_textureCreate. Returns 0 for an
+            // unknown texture. No mipmaps to regenerate: textures sample NEAREST/LINEAR.
+            wasm_textureUpdate: (id, pixels) => {
+                const entry = this.textureEntry(id);
+                if (entry === null) {
+                    console.warn(
+                        `wasm_textureUpdate: missing texture id ${id}`,
+                    );
+                    return 0;
+                }
+                const [texture, width, height, interp] = entry;
+                this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+                this.gl.texSubImage2D(
+                    this.gl.TEXTURE_2D, 0, 0, 0, width, height,
+                    this.gl.RGBA, this.gl.UNSIGNED_BYTE,
+                    this.bytesFromPointer(pixels, width * height * 4),
+                );
+                // mipmaps currently break BlurBackdrop
+                //if (this.webgl2 && (interp == 1)) {
+                    //this.gl.generateMipmap(this.gl.TEXTURE_2D);
+                //}
+                this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+                return 1;
+            },
+            // Replace the x,y,w,h rect of a texture made by wasm_textureCreate. `pixels` is the
+            // whole texture's buffer (see dvui.Backend.textureUpdateSubRect); only the rect is
+            // uploaded. Returns 0 for an unknown texture.
+            wasm_textureUpdateSubRect: (id, pixels, x, y, w, h) => {
+                const entry = this.textureEntry(id);
+                if (entry === null) {
+                    console.warn(
+                        `wasm_textureUpdateSubRect: missing texture id ${id}`,
+                    );
+                    return 0;
+                }
+                const [texture, width, height, interp] = entry;
+                if (w === 0 || h === 0) return 1;
+                const full = this.bytesFromPointer(pixels, width * height * 4);
+                this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+                if (this.webgl2) {
+                    // Read the rect in place out of the full buffer.
+                    this.gl.pixelStorei(this.gl.UNPACK_ROW_LENGTH, width);
+                    this.gl.pixelStorei(this.gl.UNPACK_SKIP_PIXELS, x);
+                    this.gl.pixelStorei(this.gl.UNPACK_SKIP_ROWS, y);
+                    this.gl.texSubImage2D(
+                        this.gl.TEXTURE_2D, 0, x, y, w, h,
+                        this.gl.RGBA, this.gl.UNSIGNED_BYTE, full,
+                    );
+                    this.gl.pixelStorei(this.gl.UNPACK_ROW_LENGTH, 0);
+                    this.gl.pixelStorei(this.gl.UNPACK_SKIP_PIXELS, 0);
+                    this.gl.pixelStorei(this.gl.UNPACK_SKIP_ROWS, 0);
+
+                    // mipmaps currently break BlurBackdrop
+                    //if (this.webgl2 && (interp == 1)) {
+                        //this.gl.generateMipmap(this.gl.TEXTURE_2D);
+                    //}
+                } else {
+                    // WebGL1 has no unpack row length: copy the rect's rows out tightly.
+                    const rect = new Uint8Array(w * h * 4);
+                    for (let row = 0; row < h; row += 1) {
+                        const start = ((y + row) * width + x) * 4;
+                        rect.set(full.subarray(start, start + w * 4), row * w * 4);
+                    }
+                    this.gl.texSubImage2D(
+                        this.gl.TEXTURE_2D, 0, x, y, w, h,
+                        this.gl.RGBA, this.gl.UNSIGNED_BYTE, rect,
+                    );
+                }
+                this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+                return 1;
+            },
             wasm_textureCreateTarget: (width, height, interp, wrap_u, wrap_v) => {
                 const texture = this.gl.createTexture();
                 const id = this.newTextureId;
                 //console.log("creating texture " + id);
                 this.newTextureId += 1;
-                this.textures.set(id, [texture, width, height]);
+                this.textures.set(id, [texture, width, height, interp]);
 
                 this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
 
@@ -532,10 +627,16 @@ export class Dvui {
                         this.gl.NEAREST,
                     );
                 } else {
+                    // mipmaps currently break BlurBackdrop
+                    //if (this.webgl2) {
+                        //this.gl.generateMipmap(this.gl.TEXTURE_2D);
+                    //}
+
                     this.gl.texParameteri(
                         this.gl.TEXTURE_2D,
                         this.gl.TEXTURE_MIN_FILTER,
                         this.gl.LINEAR,
+                        //this.gl.LINEAR_MIPMAP_LINEAR,
                     );
                     this.gl.texParameteri(
                         this.gl.TEXTURE_2D,
@@ -977,6 +1078,70 @@ export class Dvui {
                     this.hidden_input.value = "";
                 }
             },
+            wasm_fetch: (id, url_ptr, url_len, body_ptr, body_len) => {
+                const url = this.stringFromPointer(url_ptr, url_len);
+                const body = this.stringFromPointer(body_ptr, body_len);
+
+                // TODO: if a fetch was already in flight for this id, need to cancel it
+
+                var f = null;
+                if (body.length === 0) {
+                    f = fetch(url, {method: "GET"});
+                    console.log("Fetch GET", url);
+                } else {
+                    f = fetch(url, {method: "POST", body: body});
+                    console.log("Fetch POST", url, body);
+                }
+                this.fetchCache.set(id, [false, -1, null]); // negative means in-flight
+                f.catch(error => {
+                    console.error("Fetch error:", error);
+                    this.fetchCache.set(id, [false, 1, null]); // fetch failed
+                    return Promise.reject();
+                }).then((resp) => {
+                    if (!resp.ok) {
+                        console.log("fetch failed: " + resp.status);
+                        this.fetchCache.set(id, [false, resp.status, null]); // fetch failed
+                        return Promise.resolve();
+                    }
+
+                    this.fetchCache.set(id, [false, -resp.status, null]); // fetch succeeded, waiting for body
+                    console.log("fetchCache for " + id + " has response code: " + resp.status);
+                    return resp.blob();
+                })
+                .then((blob) => blob.arrayBuffer())
+                .then((buffer) => {
+                    let data = new Uint8Array(buffer);
+                    const cached = this.fetchCache.get(id);
+                    this.fetchCache.set(id, [false, -cached[1], data]);
+                    console.log("fetchCache for " + id + " has data length: " + data.length);
+                    this.requestRender();
+                }).catch(error => {
+                    this.fetchCache.set(id, [false, 2, null]); // fetch failed
+                });
+            },
+            wasm_fetch_status: (id) => {
+                const cached = this.fetchCache.get(id);
+                if (!cached) return 0; // 0 means we didn't know of a fetch with this id
+                if (cached[1] >= 0) {
+                    // mark for deletion, zig code has seen it
+                    this.fetchCache.set(id, [true, cached[1], cached[2]]);
+                }
+                return cached[1];
+            },
+            wasm_fetch_body_size: (id) => {
+                const cached = this.fetchCache.get(id);
+                if (!cached) return 0;
+                return cached[2].length;
+            },
+            wasm_fetch_body: (id, data_ptr) => {
+                const cached = this.fetchCache.get(id);
+                if (!cached) return;
+                var dest = new Uint8Array(
+                    this.instance.exports.memory.buffer,
+                    data_ptr,
+                );
+                dest.set(new Uint8Array(cached[2]));
+            },
             wasm_add_noto_font: () => {
                 dvui_fetch("NotoSansKR-Regular.ttf").then((bytes) => {
                     //console.log("bytes len " + bytes.length);
@@ -1246,6 +1411,18 @@ export class Dvui {
         }
         this.filesCacheModified = false;
 
+        this.fetchCache.forEach((val, key) => {
+            //console.log("fetchCache " + key + " " + val[0]);
+            // val[0] < 0 means fetch is still in flight
+            if (val[1] >= 0) {
+                if (val[0]) {
+                    this.fetchCache.delete(key);
+                } else {
+                    this.fetchCache.set(key, [true, val[1], val[2]]);
+                }
+            }
+        });
+
         if (millis_to_wait < 0) {
             this.stop();
         } else if (millis_to_wait == 0) {
@@ -1482,8 +1659,10 @@ export class Dvui {
             // Reset value to empty after composition maybe put text there
             ev.target.value = "";
         });
+
         this.gl.canvas.addEventListener("touchstart", (ev) => {
             if (this.stopped) return;
+            this.hidden_input.focus(); // OSK: see "OSK" above
             ev.preventDefault();
             let rect = this.gl.canvas.getBoundingClientRect();
             for (let i = 0; i < ev.changedTouches.length; i++) {
@@ -1495,7 +1674,7 @@ export class Dvui {
                 let tidx = this.touchIndex(touch.identifier);
                 this.instance.exports.add_event(
                     8,
-                    this.touches[tidx][1],
+                    tidx,
                     0,
                     x,
                     y,
@@ -1516,12 +1695,12 @@ export class Dvui {
                 let tidx = this.touchIndex(touch.identifier);
                 this.instance.exports.add_event(
                     9,
-                    this.touches[tidx][1],
+                    tidx,
                     0,
                     x,
                     y,
                 );
-                this.touches.splice(tidx, 1);
+                this.touches[tidx] = null;
             }
             // This oskCheck is for some platforms (iphone) where showing
             // the keyboard has to be done inside an event handler.
@@ -1542,7 +1721,7 @@ export class Dvui {
                 let tidx = this.touchIndex(touch.identifier);
                 this.instance.exports.add_event(
                     10,
-                    this.touches[tidx][1],
+                    tidx,
                     0,
                     x,
                     y,
