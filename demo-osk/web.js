@@ -369,6 +369,8 @@ export class Dvui {
     }
 
     constructor() {
+        // last input was a touch (see wasm_clipboardPasteRequest)
+        this.lastInputTouch = false;
         this.hidden_input = document.createElement("input");
         this.hidden_input.setAttribute("autocapitalize", "none");
         this.hidden_input.style.position = "absolute";
@@ -1069,7 +1071,10 @@ export class Dvui {
             // and deliver it as text input. A keyboard paste is delivered by
             // the browser's own paste through the hidden_input.
             wasm_clipboardPasteRequest: () => {
-                if (!navigator.clipboard || !navigator.clipboard.readText) return;
+                if (!navigator.clipboard || !navigator.clipboard.readText) {
+                    console.error("clipboardPasteRequest error: no clipboard (must connect over https or localhost)");
+                    return;
+                }
                 navigator.clipboard.readText().then((text) => {
                     if (this.stopped || !text) return;
                     const str = utf8encoder.encode(text);
@@ -1595,6 +1600,7 @@ export class Dvui {
 
         let keydown = (ev) => {
             if (this.stopped) return;
+            this.lastInputTouch = false;
             if (ev.key == "Tab") {
 
                 // In most browsers we don't even see a control-tab, the
@@ -1640,6 +1646,10 @@ export class Dvui {
         };
         this.gl.canvas.addEventListener("keyup", keyup.bind(this));
         this.hidden_input.addEventListener("keyup", keyup.bind(this));
+
+        this.hidden_input.addEventListener("paste", (ev) => {
+            ev.preventDefault();
+        });
 
         this.hidden_input.addEventListener("beforeinput", (ev) => {
             if (this.stopped) return;
